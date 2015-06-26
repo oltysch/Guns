@@ -1,0 +1,12 @@
+<Gun>
+    <Model></Model>
+    <Handy></Handy>
+    <Origin></Origin>
+    <TTC>
+        <FiringRange></FiringRange>
+        <EffectiveFiringRange></EffectiveFiringRange>
+        <CartridgeClipAvailability></CartridgeClipAvailability>
+        <OpticsAvailability></OpticsAvailability>
+    </TTC>
+    <Material></Material>
+</Gun>
