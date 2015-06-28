@@ -1,12 +1,12 @@
 <Gun>
-    <Model></Model>
-    <Handy></Handy>
-    <Origin></Origin>
+    <Model>Glock-18</Model>
+    <Handy>OneHanded</Handy>
+    <Origin>Austria</Origin>
     <TTC>
         <FiringRange></FiringRange>
-        <EffectiveFiringRange></EffectiveFiringRange>
-        <CartridgeClipAvailability></CartridgeClipAvailability>
-        <OpticsAvailability></OpticsAvailability>
+        <EffectiveFiringRange>50</EffectiveFiringRange>
+        <CartridgeClipAvailability>yes</CartridgeClipAvailability>
+        <OpticsAvailability>no</OpticsAvailability>
     </TTC>
-    <Material></Material>
+    <Material>Plastic</Material>
 </Gun>
