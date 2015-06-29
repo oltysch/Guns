@@ -3,6 +3,7 @@ import jdk.internal.org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
+import utils.ListSAXParser;
 import utils.SimpleSAXParser;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,12 +18,21 @@ import java.util.ResourceBundle;
  */
 public class Main {
     public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
-//        test simple parser
+//        test simple SAXParser
         javax.xml.parsers.SAXParserFactory spf = SAXParserFactory.newInstance();
         spf.setValidating(false);
         javax.xml.parsers.SAXParser sp = spf.newSAXParser();
-        SimpleSAXParser handler = new SimpleSAXParser();
+        SimpleSAXParser handlerSimple = new SimpleSAXParser();
         InputStream inputStream = Main.class.getResourceAsStream("gun.xml");
-        sp.parse(inputStream, handler);
+        sp.parse(inputStream, handlerSimple);
+
+//        test list SAXParser
+        org.xml.sax.XMLReader parser = XMLReaderFactory.createXMLReader();
+        parser.setFeature("http://xml.org/sax/features/validation", false);
+        ListSAXParser handlerList = new ListSAXParser();
+        parser.setContentHandler(handlerList);
+        parser.setErrorHandler(handlerList);
+        org.xml.sax.InputSource input = new org.xml.sax.InputSource(inputStream);
+        parser.parse(input);
     }
 }
