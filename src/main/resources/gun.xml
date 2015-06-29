@@ -1,5 +1,5 @@
 <Gun>
-    <Model>Glock-18</Model>
+    <Model testAttribute="this value in Model">Glock-18</Model>
     <Handy>OneHanded</Handy>
     <Origin>Austria</Origin>
     <TTC>
