@@ -1,4 +1,4 @@
-package utils;
+package com.epam.ot.parser;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

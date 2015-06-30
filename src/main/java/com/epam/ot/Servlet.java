@@ -1,3 +1,5 @@
+package com.epam.ot;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by Admin on 26.06.2015.
  */
-@WebServlet(name = "Servlet")
+@WebServlet(name = "com.epam.ot.Servlet")
 public class Servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

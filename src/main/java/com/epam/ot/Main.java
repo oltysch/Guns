@@ -1,17 +1,14 @@
-import com.sun.beans.decoder.DocumentHandler;
-import jdk.internal.org.xml.sax.InputSource;
+package com.epam.ot;
+
+import com.epam.ot.parser.ListSAXParser;
+import com.epam.ot.parser.SimpleSAXParser;
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
-import utils.ListSAXParser;
-import utils.SimpleSAXParser;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ResourceBundle;
 
 /**
  * Created by Admin on 28.06.2015.
