@@ -3,7 +3,7 @@
     <Handy>OneHanded</Handy>
     <Origin>Austria</Origin>
     <TTC>
-        <FiringRange></FiringRange>
+        <FiringRange>many</FiringRange>
         <EffectiveFiringRange>50</EffectiveFiringRange>
         <CartridgeClipAvailability>yes</CartridgeClipAvailability>
         <OpticsAvailability>no</OpticsAvailability>
