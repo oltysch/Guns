@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 public class Main {
     public static final Logger logger =Logger.getLogger(Main.class);
     public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
+        InputSource input = new InputSource("src/main/resources/gun.xml");
 //        test simple SAXParser
         System.out.println("SimpleParser");
         javax.xml.parsers.SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -26,7 +27,6 @@ public class Main {
         SimpleSAXParser handlerSimple = new SimpleSAXParser();
 //        InputStream inputStream = Main.class.getResourceAsStream("gun.xml");
 //        InputStream inputStream = Main.class.getResource("gun.xml");
-        InputSource input = new InputSource("src/main/resources/gun.xml");
         sp.parse(input, handlerSimple);
 
 //        test list SAXParser

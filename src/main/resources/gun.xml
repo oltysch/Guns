@@ -1,6 +1,9 @@
-<Gun>
+<?xml version="1.0" encoding="UTF-8"?>
+<Gun xmlns="http://www.epam.com/guns"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.epam.com/guns http://www.epam.com/guns/gun.xsd">
     <Model testAttribute="this value in Model">Glock-18</Model>
-    <Handy>OneHanded</Handy>
+    <Handy>ONE_HANDED</Handy>
     <Origin>Austria</Origin>
     <TTC>
         <FiringRange>many</FiringRange>

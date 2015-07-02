@@ -7,12 +7,13 @@ import java.util.Map;
  * Created by Admin on 30.06.2015.
  */
 public class Gun {
-    public enum Handy {ONE_HANDED, TWO_HANDED}
     private String model;
     private String origin;
     private Handy handy;
-    private String material;
     private Map<String, String> ttc = new HashMap<String, String>();
+    private String material;
+    public enum Handy {ONE_HANDED, TWO_HANDED}
+    public enum Availability {AVAILABLE, UNAVAILABLE}
 
     public String getModel() {
         return model;
