@@ -11,11 +11,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
-
+import org.apache.log4j.Logger;
 /**
  * Created by Admin on 28.06.2015.
  */
 public class Main {
+    public static final Logger logger =Logger.getLogger(Main.class);
     public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
 //        test simple SAXParser
         System.out.println("SimpleParser");
