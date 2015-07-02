@@ -5,8 +5,12 @@ import com.epam.ot.parser.SAXParser;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.XMLFormatter;
 
@@ -16,7 +20,7 @@ import org.apache.log4j.Logger;
  */
 public class Main {
     public static final Logger logger =Logger.getLogger(Main.class);
-    public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
+    public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException, JAXBException {
         InputSource input = new InputSource("src/main/resources/gun.xml");
 //        test simple SAXParser
         System.out.println("SimpleParser");
@@ -29,6 +33,14 @@ public class Main {
         parser.parse(input, handler);
         Gun gun = handler.getGun();
         System.out.println(gun.gunToString());
+
+//        serialization
+        File f = new File("1.xml");
+
+        JAXBContext context = JAXBContext.newInstance(Gun.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        marshaller.marshal(gun, f);
 
 //        test list SAXParser
 //        System.out.println("\n\nListParser");
