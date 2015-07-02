@@ -10,39 +10,30 @@ public class Gun {
     private String model;
     private String origin;
     private Handy handy;
-    private Map<String, String> ttc = new HashMap<String, String>();
+//    private Map<String, String> ttc = new HashMap<String, String>();
+    private int firingRange;
+    private int effectiveFiringRange;
+    private Availability cartridgeClip;
+    private Availability optics;
     private String material;
-    public enum Handy {ONE_HANDED, TWO_HANDED}
-    public enum Availability {AVAILABLE, UNAVAILABLE}
+    public enum Handy {One_handed, Two_handed}
+    public enum Availability {Available, Unavailable}
 
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
+    public Gun(String model, String origin, Handy handy, int firingRange, int effectiveFiringRange,
+               Availability cartridgeClip, Availability optics, String material) {
         this.model = model;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
         this.origin = origin;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(String material) {
+        this.handy = handy;
+        this.firingRange = firingRange;
+        this.effectiveFiringRange = effectiveFiringRange;
+        this.cartridgeClip = cartridgeClip;
+        this.optics = optics;
         this.material = material;
     }
 
-    public Gun(String model, String origin, /*Handy handy,*/ String material) {
-        this.model = model;
-        this.origin = origin;
-//        this.handy = handy;
-        this.material = material;
+    public String gunToString() {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(model+" "+origin+" "+handy+" "+material+"\n     FR: "+firingRange+" EFR: "+effectiveFiringRange+" CC: "+cartridgeClip+" Opt.: "+optics);
+        return stringBuffer.toString();
     }
 }

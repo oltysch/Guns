@@ -3,10 +3,10 @@
   <xs:element name="Gun" type="GunType"/>
   <xs:complexType name="TTCType">
     <xs:sequence>
-      <xs:element type="xs:string" name="FiringRange"/>
-      <xs:element type="xs:string" name="EffectiveFiringRange"/>
-      <xs:element type="xs:string" name="CartridgeClipAvailability"/>
-      <xs:element type="xs:string" name="OpticsAvailability"/>
+      <xs:element type="xs:int" name="FiringRange"/>
+      <xs:element type="xs:int" name="EffectiveFiringRange"/>
+      <xs:element type="tns:Availability" name="CartridgeClipAvailability"/>
+      <xs:element type="tns:Availability" name="OpticsAvailability"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ModelType">
@@ -28,8 +28,8 @@
   <!-- hands count need for using weapon-->
   <xs:simpleType name="Handy">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="ONE_HANDED"/>
-      <xs:enumeration value="TWO_HANDED"/>
+      <xs:enumeration value="One_handed"/>
+      <xs:enumeration value="Two_handed"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="Availability">

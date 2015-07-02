@@ -2,14 +2,14 @@
 <Gun xmlns="http://www.epam.com/guns"
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://www.epam.com/guns http://www.epam.com/guns/gun.xsd">
-    <Model testAttribute="this value in Model">Glock-18</Model>
-    <Handy>ONE_HANDED</Handy>
+    <Model>Glock-18</Model>
     <Origin>Austria</Origin>
+    <Handy>One_handed</Handy>
     <TTC>
-        <FiringRange>many</FiringRange>
+        <FiringRange>100</FiringRange>
         <EffectiveFiringRange>50</EffectiveFiringRange>
-        <CartridgeClipAvailability>yes</CartridgeClipAvailability>
-        <OpticsAvailability>no</OpticsAvailability>
+        <CartridgeClipAvailability>Available</CartridgeClipAvailability>
+        <OpticsAvailability>Unavailable</OpticsAvailability>
     </TTC>
     <Material>Plastic</Material>
 </Gun>
