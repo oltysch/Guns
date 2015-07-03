@@ -19,8 +19,11 @@ public class Gun {
     private Availability cartridgeClip;
     private Availability optics;
     private String material;
-    public enum Handy {One_handed, Two_handed}
-    public enum Availability {Available, Unavailable}
+    public enum Handy {One_handed, Two_handed;}
+    public enum Availability {Available, Unavailable;}
+
+    public Gun() {
+    }
 
     public Gun(String model, String origin, Handy handy, int firingRange, int effectiveFiringRange,
                Availability cartridgeClip, Availability optics, String material) {
@@ -36,61 +39,61 @@ public class Gun {
 
     public String gunToString() {
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(model+" "+origin+" "+handy+" "+material+"\n     FR: "+firingRange+" EFR: "+effectiveFiringRange+" CC: "+cartridgeClip+" Opt.: "+optics);
+        stringBuffer.append(model).append(" ").append(origin).append(" ").append(handy).append(" ").append(material).append("\n     FR: ").append(firingRange).append(" EFR: ").append(effectiveFiringRange).append(" CC: ").append(cartridgeClip).append(" Opt.: ").append(optics);
         return stringBuffer.toString();
     }
-
     public String getModel() {
         return model;
     }
+
     @XmlElement
     public void setModel(String model) {
         this.model = model;
     }
-
     public String getOrigin() {
         return origin;
     }
+
     @XmlElement
     public void setOrigin(String origin) {
         this.origin = origin;
     }
-
     public Handy getHandy() {
         return handy;
     }
+
     @XmlElement
     public void setHandy(Handy handy) {
         this.handy = handy;
     }
-
     public int getFiringRange() {
         return firingRange;
     }
+
     @XmlElement
     public void setFiringRange(int firingRange) {
         this.firingRange = firingRange;
     }
-
     public int getEffectiveFiringRange() {
         return effectiveFiringRange;
     }
+
     @XmlElement
     public void setEffectiveFiringRange(int effectiveFiringRange) {
         this.effectiveFiringRange = effectiveFiringRange;
     }
-
     public Availability getCartridgeClip() {
         return cartridgeClip;
     }
+
     @XmlElement
     public void setCartridgeClip(Availability cartridgeClip) {
         this.cartridgeClip = cartridgeClip;
     }
-
     public Availability getOptics() {
         return optics;
     }
+
     @XmlElement
     public void setOptics(Availability optics) {
         this.optics = optics;
@@ -98,9 +101,6 @@ public class Gun {
 
     public String getMaterial() {
         return material;
-    }
-
-    public Gun() {
     }
 
     @XmlElement

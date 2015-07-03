@@ -32,7 +32,8 @@
       <xs:enumeration value="Two_handed"/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name="Availability">
+  <!--delete this - use boolean-->
+    <xs:simpleType name="Availability">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Available"/>
       <xs:enumeration value="Unavailable"/>

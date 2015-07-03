@@ -30,13 +30,14 @@ public class Main {
         SAXParser handler = new SAXParser();
 //        InputStream inputStream = Main.class.getResourceAsStream("gun.xml");
 //        InputStream inputStream = Main.class.getResource("gun.xml");
-        parser.parse(input, handler);
+        parser.parse(input, handler); //move this inside gunParser
         Gun gun = handler.getGun();
         System.out.println(gun.gunToString());
 
 //        serialization
         File f = new File("1.xml");
-
+        
+        //move inside new parser - returns xml or InputStream
         JAXBContext context = JAXBContext.newInstance(Gun.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
