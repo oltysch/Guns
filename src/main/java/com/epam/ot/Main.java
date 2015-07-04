@@ -1,18 +1,18 @@
 package com.epam.ot;
 
 import com.epam.ot.entity.Gun;
-import com.epam.ot.parser.SAXParser;
+import com.epam.ot.parser.JAXBGunParser;
+import com.epam.ot.parser.JAXPGunParser;
+import com.epam.ot.parser.SAXGunParser;
+import com.epam.ot.parser.StAXGunParser;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.XMLFormatter;
+import java.io.InputStream;
 
 import org.apache.log4j.Logger;
 /**
@@ -20,37 +20,24 @@ import org.apache.log4j.Logger;
  */
 public class Main {
     public static final Logger logger =Logger.getLogger(Main.class);
-    public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException, JAXBException {
-        InputSource input = new InputSource("src/main/resources/gun.xml");
-//        test simple SAXParser
+    public static void main(String[] args) throws JAXBException {
+        InputStream input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
+//        test simple SAXGunParser
         System.out.println("SimpleParser");
-        javax.xml.parsers.SAXParserFactory spf = SAXParserFactory.newInstance();
-        spf.setValidating(false);
-        javax.xml.parsers.SAXParser parser = spf.newSAXParser();
-        SAXParser handler = new SAXParser();
-//        InputStream inputStream = Main.class.getResourceAsStream("gun.xml");
-//        InputStream inputStream = Main.class.getResource("gun.xml");
-        parser.parse(input, handler); //move this inside gunParser
-        Gun gun = handler.getGun();
+        SAXGunParser saxGunParser = new SAXGunParser();
+        StAXGunParser stAXGunParser = new StAXGunParser();
+        JAXPGunParser jaxpGunParser = new JAXPGunParser();
+        JAXBGunParser jaxbGunParser = new JAXBGunParser();
+        Gun gun = saxGunParser.parse(input);
         System.out.println(gun.gunToString());
 
-//        serialization
+/*//        serialization in XML
         File f = new File("1.xml");
-        
-        //move inside new parser - returns xml or InputStream
+
+        //need move this inside new parser - returns xml or InputStream
         JAXBContext context = JAXBContext.newInstance(Gun.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        marshaller.marshal(gun, f);
-
-//        test list SAXParser
-//        System.out.println("\n\nListParser");
-//        org.xml.sax.XMLReader parser = XMLReaderFactory.createXMLReader();
-//        parser.setFeature("http://xml.org/sax/features/validation", false);
-//        ListSAXParser handlerList = new ListSAXParser();
-//        parser.setContentHandler(handlerList);
-//        parser.setErrorHandler(handlerList);
-//        InputSource input = new InputSource(inputStream);
-//        parser.parse(input);
+        marshaller.marshal(gun, f);*/
     }
 }

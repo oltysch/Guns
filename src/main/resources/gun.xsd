@@ -5,8 +5,8 @@
     <xs:sequence>
       <xs:element type="xs:int" name="FiringRange"/>
       <xs:element type="xs:int" name="EffectiveFiringRange"/>
-      <xs:element type="tns:Availability" name="CartridgeClipAvailability"/>
-      <xs:element type="tns:Availability" name="OpticsAvailability"/>
+      <xs:element type="xs:boolean" name="CartridgeClipAvailability"/>
+      <xs:element type="xs:boolean" name="OpticsAvailability"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ModelType">
@@ -30,13 +30,6 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="One_handed"/>
       <xs:enumeration value="Two_handed"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <!--delete this - use boolean-->
-    <xs:simpleType name="Availability">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Available"/>
-      <xs:enumeration value="Unavailable"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

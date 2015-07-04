@@ -16,17 +16,15 @@ public class Gun {
 //    private Map<String, String> ttc = new HashMap<String, String>();
     private int firingRange;
     private int effectiveFiringRange;
-    private Availability cartridgeClip;
-    private Availability optics;
+    private Boolean cartridgeClip;
+    private Boolean optics;
     private String material;
     public enum Handy {One_handed, Two_handed;}
-    public enum Availability {Available, Unavailable;}
-
     public Gun() {
     }
 
     public Gun(String model, String origin, Handy handy, int firingRange, int effectiveFiringRange,
-               Availability cartridgeClip, Availability optics, String material) {
+               Boolean cartridgeClip, Boolean optics, String material) {
         this.model = model;
         this.origin = origin;
         this.handy = handy;
@@ -82,20 +80,20 @@ public class Gun {
     public void setEffectiveFiringRange(int effectiveFiringRange) {
         this.effectiveFiringRange = effectiveFiringRange;
     }
-    public Availability getCartridgeClip() {
+    public Boolean getCartridgeClip() {
         return cartridgeClip;
     }
 
     @XmlElement
-    public void setCartridgeClip(Availability cartridgeClip) {
+    public void setCartridgeClip(Boolean cartridgeClip) {
         this.cartridgeClip = cartridgeClip;
     }
-    public Availability getOptics() {
+    public Boolean getOptics() {
         return optics;
     }
 
     @XmlElement
-    public void setOptics(Availability optics) {
+    public void setOptics(Boolean optics) {
         this.optics = optics;
     }
 

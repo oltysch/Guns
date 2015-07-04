@@ -8,8 +8,8 @@
     <TTC>
         <FiringRange>100</FiringRange>
         <EffectiveFiringRange>50</EffectiveFiringRange>
-        <CartridgeClipAvailability>Available</CartridgeClipAvailability>
-        <OpticsAvailability>Unavailable</OpticsAvailability>
+        <CartridgeClipAvailability>true</CartridgeClipAvailability>
+        <OpticsAvailability>false</OpticsAvailability>
     </TTC>
     <Material>Plastic</Material>
 </Gun>
