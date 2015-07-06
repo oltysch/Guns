@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.epam.com/guns" xmlns:tns="http://www.epam.com/guns">
-  <xs:element name="Gun" type="GunType"/>
+  <xs:element name="gun" type="GunType"/>
   <xs:complexType name="TTCType">
     <xs:sequence>
-      <xs:element type="xs:int" name="FiringRange"/>
-      <xs:element type="xs:int" name="EffectiveFiringRange"/>
-      <xs:element type="xs:boolean" name="CartridgeClipAvailability"/>
-      <xs:element type="xs:boolean" name="OpticsAvailability"/>
+      <xs:element type="xs:int" name="firingRange"/>
+      <xs:element type="xs:int" name="effectiveFiringRange"/>
+      <xs:element type="xs:boolean" name="cartridgeClipAvailability"/>
+      <xs:element type="xs:boolean" name="opticsAvailability"/>
     </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="ModelType">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute type="xs:string" name="testAttribute"/>
-      </xs:extension>
-    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="GunType">
     <xs:sequence>
-      <xs:element type="ModelType" name="Model"/>
-      <xs:element type="tns:Handy" name="Handy"/>
-      <xs:element type="xs:string" name="Origin"/>
+      <xs:element type="xs:string" name="model"/>
+      <xs:element type="tns:Handy" name="handy"/>
+      <xs:element type="xs:string" name="origin"/>
       <xs:element type="TTCType" name="TTC"/>
-      <xs:element type="xs:string" name="Material"/>
+      <xs:element type="xs:string" name="material"/>
     </xs:sequence>
   </xs:complexType>
   <!-- hands count need for using weapon-->

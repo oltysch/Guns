@@ -12,7 +12,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 /**
@@ -20,18 +23,27 @@ import org.apache.log4j.Logger;
  */
 public class Main {
     public static final Logger logger =Logger.getLogger(Main.class);
-    public static void main(String[] args) throws JAXBException {
+    public static void main(String[] args) throws JAXBException, IOException {
         InputStream input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
 //        test simple SAXGunParser
         System.out.println("SimpleParser");
         SAXGunParser saxGunParser = new SAXGunParser();
-        StAXGunParser stAXGunParser = new StAXGunParser();
+        StAXGunParser staxGunParser = new StAXGunParser();
         JAXPGunParser jaxpGunParser = new JAXPGunParser();
         JAXBGunParser jaxbGunParser = new JAXBGunParser();
-        Gun gun = saxGunParser.parse(input);
-        System.out.println(gun.gunToString());
+        List<Gun> gunList= new ArrayList<Gun>();
+        gunList.add(saxGunParser.parse(input));
+        logger.debug("next parser");
+        input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
+        gunList.add(staxGunParser.parse(input));
+//        gunList.add(jaxpGunParser.parse(input));
+//        gunList.add(jaxbGunParser.parse(input));
+        for (Gun gun : gunList) {
+            System.out.println(gun.gunToString());
+        }
 
 /*//        serialization in XML
+
         File f = new File("1.xml");
 
         //need move this inside new parser - returns xml or InputStream

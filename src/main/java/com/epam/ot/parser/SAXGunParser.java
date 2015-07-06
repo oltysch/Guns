@@ -37,22 +37,22 @@ public class SAXGunParser implements GunParser {
 
     class Handler extends DefaultHandler {
         StringBuffer accumulator = new StringBuffer();
-        Gun gun;
-        String model;
-        Gun.Handy handy;
-        String origin;
-        String material;
-        private int firingRange;
-        private int effectiveFiringRange;
-        private Boolean cartridgeClip;
-        private Boolean optics;
+        Gun gun = new Gun();
+//        String model;
+//        Gun.Handy handy;
+//        String origin;
+//        String material;
+//        private int firingRange;
+//        private int effectiveFiringRange;
+//        private Boolean cartridgeClip;
+//        private Boolean optics;
 
         public Gun getGun() {
             return gun;
         }
 
         public void endDocument() throws SAXException {
-            gun = new Gun(model, origin, handy, firingRange, effectiveFiringRange, cartridgeClip, optics, material);
+//            gun = new Gun(model, origin, handy, firingRange, effectiveFiringRange, cartridgeClip, optics, material);
             logger.info("parsing ended");
         }
 
@@ -67,30 +67,38 @@ public class SAXGunParser implements GunParser {
         public void endElement(String uri, String localName, String qName) throws SAXException {
             logger.debug("QName: \"" + qName + "\". Value: \"" + accumulator.toString().trim() + "\"");
             switch (qName) {
-                case "Model":
-                    model = accumulator.toString().trim();
+                case "model":
+//                    model = accumulator.toString().trim();
+                    gun.setModel(accumulator.toString().trim());
                     logger.debug("chars1: " + accumulator.toString());
                     break;
-                case "Handy":
-                    handy = Gun.Handy.valueOf(accumulator.toString().trim());
+                case "handy":
+//                    handy = Gun.Handy.valueOf(accumulator.toString().trim());
+                    gun.setHandy(Gun.Handy.valueOf(accumulator.toString().trim()));
                     break;
-                case "Origin":
-                    origin = accumulator.toString().trim();
+                case "origin":
+//                    origin = accumulator.toString().trim();
+                    gun.setOrigin(accumulator.toString().trim());
                     break;
-                case "FiringRange":
-                    firingRange = Integer.parseInt(accumulator.toString().trim());
+                case "firingRange":
+//                    firingRange = Integer.parseInt(accumulator.toString().trim());
+                    gun.setFiringRange(Integer.parseInt(accumulator.toString().trim()));
                     break;
-                case "EffectiveFiringRange":
-                    effectiveFiringRange = Integer.parseInt(accumulator.toString().trim());
+                case "effectiveFiringRange":
+//                    effectiveFiringRange = Integer.parseInt(accumulator.toString().trim());
+                    gun.setEffectiveFiringRange(Integer.parseInt(accumulator.toString().trim()));
                     break;
-                case "CartridgeClipAvailability":
-                    cartridgeClip = Boolean.valueOf(accumulator.toString().trim());
+                case "cartridgeClipAvailability":
+//                    cartridgeClip = Boolean.valueOf(accumulator.toString().trim());
+                    gun.setCartridgeClip(Boolean.valueOf(accumulator.toString().trim()));
                     break;
-                case "OpticsAvailability":
-                    optics = Boolean.valueOf(accumulator.toString().trim());
+                case "opticsAvailability":
+//                    optics = Boolean.valueOf(accumulator.toString().trim());
+                    gun.setOptics(Boolean.valueOf(accumulator.toString().trim()));
                     break;
-                case "Material":
-                    material = accumulator.toString().trim();
+                case "material":
+//                    material = accumulator.toString().trim();
+                    gun.setMaterial(accumulator.toString().trim());
                     break;
                 default:
             }
