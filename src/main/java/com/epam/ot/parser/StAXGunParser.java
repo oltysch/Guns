@@ -3,10 +3,7 @@ package com.epam.ot.parser;
 import com.epam.ot.entity.Gun;
 import com.epam.ot.exception.ParseException;
 
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.*;
 import java.io.InputStream;
 import org.apache.log4j.Logger;
 /**
@@ -14,6 +11,7 @@ import org.apache.log4j.Logger;
  */
 public class StAXGunParser implements GunParser{
     public static final Logger logger =Logger.getLogger(StAXGunParser.class);
+
     public Gun parse(InputStream input) {
         logger.debug("started parsing");
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
@@ -26,6 +24,9 @@ public class StAXGunParser implements GunParser{
         } catch (XMLStreamException e) {
             throw new ParseException(e);
         }
+    }
+
+    public void serialize(Gun gun) {
     }
 
     private Gun process(XMLStreamReader reader) throws XMLStreamException {

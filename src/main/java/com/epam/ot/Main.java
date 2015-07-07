@@ -1,23 +1,19 @@
 package com.epam.ot;
 
 import com.epam.ot.entity.Gun;
+import com.epam.ot.parser.DOMGunParser;
 import com.epam.ot.parser.JAXBGunParser;
-import com.epam.ot.parser.JAXPGunParser;
 import com.epam.ot.parser.SAXGunParser;
 import com.epam.ot.parser.StAXGunParser;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+
 /**
  * Created by Admin on 28.06.2015.
  */
@@ -29,14 +25,16 @@ public class Main {
         System.out.println("SimpleParser");
         SAXGunParser saxGunParser = new SAXGunParser();
         StAXGunParser staxGunParser = new StAXGunParser();
-        JAXPGunParser jaxpGunParser = new JAXPGunParser();
+        DOMGunParser domGunParser = new DOMGunParser();
         JAXBGunParser jaxbGunParser = new JAXBGunParser();
         List<Gun> gunList= new ArrayList<Gun>();
         gunList.add(saxGunParser.parse(input));
         logger.debug("next parser");
         input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
         gunList.add(staxGunParser.parse(input));
-//        gunList.add(jaxpGunParser.parse(input));
+        input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
+        domGunParser.parse(input);
+//        gunList.add(DOMGunParser.parse(input));
 //        gunList.add(jaxbGunParser.parse(input));
         for (Gun gun : gunList) {
             System.out.println(gun.gunToString());
