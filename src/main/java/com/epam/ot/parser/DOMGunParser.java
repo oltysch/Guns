@@ -3,6 +3,7 @@ package com.epam.ot.parser;
 import com.epam.ot.entity.Gun;
 import com.epam.ot.exception.ParseException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -25,22 +26,52 @@ public class DOMGunParser implements GunParser {
      */
     public Gun parse(InputStream input) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setValidating(false);
+        Gun gun;
+
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             //next code is not finished
             Document doc = builder.parse(input);
-            Node node = doc.getChildNodes().item(0);
-            NodeList nodeList = node.getChildNodes();
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Node nodet = nodeList.item(i);
-                System.out.println(nodet.getLocalName());
-            }
-            System.out.println(nodeList.toString());
-            System.out.println(nodeList.getLength());
+            Element root = doc.getDocumentElement();
+            gun = Analyzer.gunBuilder(root);
         } catch (ParserConfigurationException|SAXException|IOException e) {
             throw new ParseException(e);
         }
-        return null;
+        return gun;
+    }
+
+    private static class Analyzer {
+        public static Gun gunBuilder(Element root) {
+            NodeList nodes = root.getElementsByTagName("gun");
+            Gun gun = new Gun();
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Element gunElement = (Element) nodes.item(i);
+                //example without reduction
+                gun.setModel(gunElement.getElementsByTagName("model").item(0).getFirstChild().getNodeValue());
+                //examples with reduction
+                gun.setOrigin(getBabyValue(gunElement, "origin"));
+                gun.setHandy(Gun.Handy.valueOf(getBabyValue(gunElement, "handy")));
+                gun.setMaterial(getBabyValue(gunElement, "material"));
+                //getting weapon TTC's
+                gun.setFiringRange(Integer.parseInt(getBabyValue(gunElement, "firingRange")));
+                gun.setEffectiveFiringRange(Integer.parseInt(getBabyValue(gunElement, "effectiveFiringRange")));
+                gun.setCartridgeClip(Boolean.valueOf(getBabyValue(gunElement, "cartridgeClipAvailability")));
+                gun.setOptics(Boolean.valueOf(getBabyValue(gunElement, "opticsAvailability")));
+            }
+            return gun;
+        }
+
+        private static String getBabyValue(Element parent, String childName) {
+            Element child = getBaby(parent, childName);
+            Node node = child.getFirstChild();
+            String value = node.getNodeValue();
+            return value;
+        }
+
+        private static Element getBaby(Element parent, String childName) {
+            NodeList nList = parent.getElementsByTagName(childName);
+            Element child = (Element) nList.item(0);
+            return child;
+        }
     }
 }

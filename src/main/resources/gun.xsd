@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.epam.com/guns" xmlns:tns="http://www.epam.com/guns">
+  <xs:element name = "guns">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="gun" minOccurs="1" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="model"/>
+              <xs:element type="xs:string" name="origin"/>
+              <xs:element type="tns:Handy" name="handy"/>
+              <xs:element minOccurs="1" maxOccurs="1" name="TTC">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="0" type="xs:int" name="firingRange"/>
+                    <xs:element minOccurs="0" type="xs:int" name="effectiveFiringRange"/>
+                    <xs:element minOccurs="0" type="xs:boolean" name="cartridgeClipAvailability"/>
+                    <xs:element minOccurs="0" type="xs:boolean" name="opticsAvailability"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="material"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- hands count need for using weapon-->
+  <xs:simpleType name="Handy">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="One_handed"/>
+      <xs:enumeration value="Two_handed"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!--old code:
+  <xs:element name = "guns" type="GunsType" />
   <xs:element name="gun" type="GunType"/>
   <xs:complexType name="TTCType">
     <xs:sequence>
@@ -18,11 +53,16 @@
       <xs:element type="xs:string" name="material"/>
     </xs:sequence>
   </xs:complexType>
-  <!-- hands count need for using weapon-->
+  <xs:complexType name="GunsType">
+    <xs:sequence>
+      <xs:element type="tns:GunType" name="gun"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  &lt;!&ndash; hands count need for using weapon&ndash;&gt;
   <xs:simpleType name="Handy">
     <xs:restriction base="xs:string">
       <xs:enumeration value="One_handed"/>
       <xs:enumeration value="Two_handed"/>
     </xs:restriction>
-  </xs:simpleType>
+  </xs:simpleType>-->
 </xs:schema>

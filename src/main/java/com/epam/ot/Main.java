@@ -28,13 +28,14 @@ public class Main {
         DOMGunParser domGunParser = new DOMGunParser();
         JAXBGunParser jaxbGunParser = new JAXBGunParser();
         List<Gun> gunList= new ArrayList<Gun>();
+        logger.debug("sax parser");
         gunList.add(saxGunParser.parse(input));
-        logger.debug("next parser");
         input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
+        logger.debug("stax parser");
         gunList.add(staxGunParser.parse(input));
         input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
-        domGunParser.parse(input);
-//        gunList.add(DOMGunParser.parse(input));
+        logger.debug("dom parser");
+        gunList.add(domGunParser.parse(input));
 //        gunList.add(jaxbGunParser.parse(input));
         for (Gun gun : gunList) {
             System.out.println(gun.gunToString());

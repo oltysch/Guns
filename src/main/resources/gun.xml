@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gun xmlns="http://www.epam.com/guns"
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://www.epam.com/guns http://www.epam.com/guns/gun.xsd">
-    <model>Glock-18</model>
-    <origin>Austria</origin>
-    <handy>One_handed</handy>
-    <TTC>
-        <firingRange>100</firingRange>
-        <effectiveFiringRange>50</effectiveFiringRange>
-        <cartridgeClipAvailability>true</cartridgeClipAvailability>
-        <opticsAvailability>false</opticsAvailability>
-    </TTC>
-    <material>Plastic</material>
-</gun>
+<guns xmlns="http://www.epam.com/guns"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.epam.com/guns http://www.epam.com/guns/gun.xsd">
+    <gun>
+        <model>Glock-18</model>
+        <origin>Austria</origin>
+        <handy>One_handed</handy>
+        <TTC>
+            <firingRange>100</firingRange>
+            <effectiveFiringRange>50</effectiveFiringRange>
+            <cartridgeClipAvailability>true</cartridgeClipAvailability>
+            <opticsAvailability>false</opticsAvailability>
+        </TTC>
+        <material>Plastic</material>
+    </gun>
+</guns>
