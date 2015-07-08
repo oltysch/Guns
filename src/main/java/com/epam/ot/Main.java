@@ -10,7 +10,9 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -27,15 +29,15 @@ public class Main {
         StAXGunParser staxGunParser = new StAXGunParser();
         DOMGunParser domGunParser = new DOMGunParser();
         JAXBGunParser jaxbGunParser = new JAXBGunParser();
-        List<Gun> gunList= new ArrayList<Gun>();
+        List<Gun> gunList= new ArrayList<>();
         logger.debug("sax parser");
-        gunList.add(saxGunParser.parse(input));
+        gunList.addAll(saxGunParser.parse(input));
         input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
         logger.debug("stax parser");
-        gunList.add(staxGunParser.parse(input));
+        gunList.addAll(staxGunParser.parse(input));
         input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
         logger.debug("dom parser");
-        gunList.add(domGunParser.parse(input));
+        gunList.addAll(domGunParser.parse(input));
 //        gunList.add(jaxbGunParser.parse(input));
         for (Gun gun : gunList) {
             System.out.println(gun.gunToString());

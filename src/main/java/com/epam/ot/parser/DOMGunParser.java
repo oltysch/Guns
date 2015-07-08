@@ -14,6 +14,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 04.07.2015.
@@ -24,27 +26,27 @@ public class DOMGunParser implements GunParser {
      * @return Gun
      * parser is not finished yet
      */
-    public Gun parse(InputStream input) {
+    public List<Gun> parse(InputStream input) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        Gun gun;
-
+        List<Gun> guns;
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             //next code is not finished
             Document doc = builder.parse(input);
             Element root = doc.getDocumentElement();
-            gun = Analyzer.gunBuilder(root);
+            guns = Analyzer.gunBuilder(root);
         } catch (ParserConfigurationException|SAXException|IOException e) {
             throw new ParseException(e);
         }
-        return gun;
+        return guns;
     }
 
     private static class Analyzer {
-        public static Gun gunBuilder(Element root) {
+        public static List<Gun> gunBuilder(Element root) {
             NodeList nodes = root.getElementsByTagName("gun");
-            Gun gun = new Gun();
+            List<Gun> guns = new ArrayList<Gun>();
             for (int i = 0; i < nodes.getLength(); i++) {
+                Gun gun = new Gun();
                 Element gunElement = (Element) nodes.item(i);
                 //example without reduction
                 gun.setModel(gunElement.getElementsByTagName("model").item(0).getFirstChild().getNodeValue());
@@ -57,8 +59,9 @@ public class DOMGunParser implements GunParser {
                 gun.setEffectiveFiringRange(Integer.parseInt(getBabyValue(gunElement, "effectiveFiringRange")));
                 gun.setCartridgeClip(Boolean.valueOf(getBabyValue(gunElement, "cartridgeClipAvailability")));
                 gun.setOptics(Boolean.valueOf(getBabyValue(gunElement, "opticsAvailability")));
+                guns.add(gun);
             }
-            return gun;
+            return guns;
         }
 
         private static String getBabyValue(Element parent, String childName) {

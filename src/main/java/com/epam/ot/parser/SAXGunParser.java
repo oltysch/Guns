@@ -14,6 +14,8 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 29.06.2015.
@@ -21,22 +23,23 @@ import java.io.InputStream;
 public class SAXGunParser implements GunParser {
     public static final Logger logger = Logger.getLogger(SAXGunParser.class);
 
-    public Gun parse(InputStream input) {
+    public List<Gun> parse(InputStream input) {
         SAXParserFactory spf = SAXParserFactory.newInstance();
-        Gun gun;
+        List<Gun> guns;
         try {
             SAXParser parser = spf.newSAXParser();
             Handler handler = new Handler();
             parser.parse(input, handler);
-            gun = handler.getGun();
+            guns = handler.getGuns();
         } catch (ParserConfigurationException | SAXException | IOException e) {
             throw new ParseException(e);
         }
-        return gun;
+        return guns;
     }
 
     class Handler extends DefaultHandler {
         StringBuffer accumulator = new StringBuffer();
+        List<Gun> guns = new ArrayList<>();
         Gun gun = new Gun();
 //        String model;
 //        Gun.Handy handy;
@@ -47,8 +50,8 @@ public class SAXGunParser implements GunParser {
 //        private Boolean cartridgeClip;
 //        private Boolean optics;
 
-        public Gun getGun() {
-            return gun;
+        public List<Gun> getGuns() {
+            return guns;
         }
 
         public void endDocument() throws SAXException {
@@ -58,6 +61,7 @@ public class SAXGunParser implements GunParser {
 
         public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
             accumulator.setLength(0);
+            if (qName.equals("gun")) gun = new Gun();
         }
 
         public void characters(char[] buffer, int start, int length) {
@@ -100,6 +104,8 @@ public class SAXGunParser implements GunParser {
 //                    material = accumulator.toString().trim();
                     gun.setMaterial(accumulator.toString().trim());
                     break;
+                case "gun":
+                    guns.add(gun);
                 default:
             }
         }

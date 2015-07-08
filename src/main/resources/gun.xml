@@ -14,4 +14,16 @@
         </TTC>
         <material>Plastic</material>
     </gun>
+    <gun>
+        <model>Beretta</model>
+        <origin>USA</origin>
+        <handy>One_handed</handy>
+        <TTC>
+            <firingRange>100</firingRange>
+            <effectiveFiringRange>50</effectiveFiringRange>
+            <cartridgeClipAvailability>true</cartridgeClipAvailability>
+            <opticsAvailability>true</opticsAvailability>
+        </TTC>
+        <material>ArmedPlastic</material>
+    </gun>
 </guns>
