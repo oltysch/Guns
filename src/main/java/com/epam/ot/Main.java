@@ -21,17 +21,12 @@ import org.apache.log4j.Logger;
  */
 public class Main {
     public static final Logger logger =Logger.getLogger(Main.class);
-    public static void main(String[] args) throws JAXBException, IOException {
+    public static void main(String[] args) {
         InputStream input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
-//        test simple SAXGunParser
-        System.out.println("SimpleParser");
-        SAXGunParser saxGunParser = new SAXGunParser();
         StAXGunParser staxGunParser = new StAXGunParser();
         DOMGunParser domGunParser = new DOMGunParser();
         JAXBGunParser jaxbGunParser = new JAXBGunParser();
         List<Gun> gunList= new ArrayList<>();
-        logger.debug("sax parser");
-        gunList.addAll(saxGunParser.parse(input));
         input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
         logger.debug("stax parser");
         gunList.addAll(staxGunParser.parse(input));
@@ -40,7 +35,7 @@ public class Main {
         gunList.addAll(domGunParser.parse(input));
 //        gunList.add(jaxbGunParser.parse(input));
         for (Gun gun : gunList) {
-            System.out.println(gun.gunToString());
+            System.out.println(gun);
         }
 
 /*//        serialization in XML

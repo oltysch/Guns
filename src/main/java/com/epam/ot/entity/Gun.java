@@ -35,10 +35,9 @@ public class Gun {
         this.material = material;
     }
 
-    public String gunToString() {
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(model).append(" ").append(origin).append(" ").append(handy).append(" ").append(material).append("\n     FR: ").append(firingRange).append(" EFR: ").append(effectiveFiringRange).append(" CC: ").append(cartridgeClip).append(" Opt.: ").append(optics);
-        return stringBuffer.toString();
+    @Override
+    public String toString() {
+        return model + " " + origin + " " + handy + " " + material + "\n     FR: " + firingRange + " EFR: " + effectiveFiringRange + " CC: " + cartridgeClip + " Opt.: " + optics;
     }
     public String getModel() {
         return model;

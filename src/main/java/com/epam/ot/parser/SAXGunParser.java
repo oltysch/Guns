@@ -31,7 +31,7 @@ public class SAXGunParser implements GunParser {
             Handler handler = new Handler();
             parser.parse(input, handler);
             guns = handler.getGuns();
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
             throw new ParseException(e);
         }
         return guns;
@@ -41,14 +41,6 @@ public class SAXGunParser implements GunParser {
         StringBuffer accumulator = new StringBuffer();
         List<Gun> guns = new ArrayList<>();
         Gun gun = new Gun();
-//        String model;
-//        Gun.Handy handy;
-//        String origin;
-//        String material;
-//        private int firingRange;
-//        private int effectiveFiringRange;
-//        private Boolean cartridgeClip;
-//        private Boolean optics;
 
         public List<Gun> getGuns() {
             return guns;
@@ -72,36 +64,28 @@ public class SAXGunParser implements GunParser {
             logger.debug("QName: \"" + qName + "\". Value: \"" + accumulator.toString().trim() + "\"");
             switch (qName) {
                 case "model":
-//                    model = accumulator.toString().trim();
                     gun.setModel(accumulator.toString().trim());
                     logger.debug("chars1: " + accumulator.toString());
                     break;
                 case "handy":
-//                    handy = Gun.Handy.valueOf(accumulator.toString().trim());
                     gun.setHandy(Gun.Handy.valueOf(accumulator.toString().trim()));
                     break;
                 case "origin":
-//                    origin = accumulator.toString().trim();
                     gun.setOrigin(accumulator.toString().trim());
                     break;
                 case "firingRange":
-//                    firingRange = Integer.parseInt(accumulator.toString().trim());
                     gun.setFiringRange(Integer.parseInt(accumulator.toString().trim()));
                     break;
                 case "effectiveFiringRange":
-//                    effectiveFiringRange = Integer.parseInt(accumulator.toString().trim());
                     gun.setEffectiveFiringRange(Integer.parseInt(accumulator.toString().trim()));
                     break;
                 case "cartridgeClipAvailability":
-//                    cartridgeClip = Boolean.valueOf(accumulator.toString().trim());
                     gun.setCartridgeClip(Boolean.valueOf(accumulator.toString().trim()));
                     break;
                 case "opticsAvailability":
-//                    optics = Boolean.valueOf(accumulator.toString().trim());
                     gun.setOptics(Boolean.valueOf(accumulator.toString().trim()));
                     break;
                 case "material":
-//                    material = accumulator.toString().trim();
                     gun.setMaterial(accumulator.toString().trim());
                     break;
                 case "gun":
