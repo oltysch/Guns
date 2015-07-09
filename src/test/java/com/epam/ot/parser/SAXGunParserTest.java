@@ -32,7 +32,7 @@ public class SAXGunParserTest {
 
 //    test if inputStream will null
     @Test
-    public void testIfInputNull() throws Exception {
+    public void shouldThrowExceptionForNullInputStream() throws Exception {
         InputStream input = null;
 
         Throwable throwable = null;
@@ -47,7 +47,7 @@ public class SAXGunParserTest {
 
 //    test parser outputs
     @Test
-    public void testParse() throws Exception {
+    public void shouldParseGoodXML() throws Exception {
         InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
 
         gunList.addAll(gunParser.parse(input));

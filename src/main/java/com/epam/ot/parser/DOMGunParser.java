@@ -34,7 +34,7 @@ public class DOMGunParser implements GunParser {
             Document doc = builder.parse(input);
             Element root = doc.getDocumentElement();
             guns = Analyzer.gunBuilder(root);
-        } catch (ParserConfigurationException|SAXException|IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
             throw new ParseException(e);
         }
         return guns;

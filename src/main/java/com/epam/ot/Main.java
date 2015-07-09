@@ -22,21 +22,7 @@ import org.apache.log4j.Logger;
 public class Main {
     public static final Logger logger =Logger.getLogger(Main.class);
     public static void main(String[] args) {
-        InputStream input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
-        StAXGunParser staxGunParser = new StAXGunParser();
-        DOMGunParser domGunParser = new DOMGunParser();
-        JAXBGunParser jaxbGunParser = new JAXBGunParser();
-        List<Gun> gunList= new ArrayList<>();
-        input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
-        logger.debug("stax parser");
-        gunList.addAll(staxGunParser.parse(input));
-        input = Main.class.getClassLoader().getResourceAsStream("gun.xml");
-        logger.debug("dom parser");
-        gunList.addAll(domGunParser.parse(input));
 //        gunList.add(jaxbGunParser.parse(input));
-        for (Gun gun : gunList) {
-            System.out.println(gun);
-        }
 
 /*//        serialization in XML
 

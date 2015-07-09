@@ -14,14 +14,17 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
-public class StAXGunParserTest {
+/**
+ * Created by Admin on 09.07.2015.
+ */
+public class DOMGunParserTest {
     GunParser gunParser;
     List<Gun> gunList;
     public static final Logger logger =Logger.getLogger(SAXGunParserTest.class);
 
     @Before
     public void setUp() throws Exception {
-        gunParser = new StAXGunParser();
+        gunParser = new DOMGunParser();
         gunList = new ArrayList<>();
     }
 
