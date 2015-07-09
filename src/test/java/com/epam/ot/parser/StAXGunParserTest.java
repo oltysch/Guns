@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 public class StAXGunParserTest {
-    GunParser gunParser;
+    StAXGunParser gunParser;
     List<Gun> gunList;
     public static final Logger logger =Logger.getLogger(SAXGunParserTest.class);
 
@@ -54,5 +55,13 @@ public class StAXGunParserTest {
         }
 
         assertEquals("Size of gun list should be equal 2", 2, gunList.size());
+    }
+
+    @Test
+    public void testSerialize() throws Exception {
+        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
+
+        gunList.addAll(gunParser.parse(input));
+        gunParser.writeGun(new File("123.xml"), gunList.get(0));
     }
 }
