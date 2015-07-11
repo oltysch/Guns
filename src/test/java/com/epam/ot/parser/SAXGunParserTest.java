@@ -6,11 +6,9 @@ import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
@@ -30,6 +28,19 @@ public class SAXGunParserTest {
 
     }
 
+    //    test parser outputs
+    @Test
+    public void testParse() throws Exception {
+        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
+
+        gunList.addAll(gunParser.parse(input));
+        for (Gun gun : gunList) {
+            logger.info(gun);
+        }
+
+        assertEquals("Size of gun list should be equal 2", 2, gunList.size());
+    }
+
 //    test if inputStream will null
     @Test
     public void shouldThrowExceptionForNullInputStream() throws Exception {
@@ -43,18 +54,5 @@ public class SAXGunParserTest {
         }
 
         assertThat(throwable, instanceOf(ParseException.class));
-    }
-
-//    test parser outputs
-    @Test
-    public void shouldParseGoodXML() throws Exception {
-        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
-
-        gunList.addAll(gunParser.parse(input));
-        for (Gun gun : gunList) {
-            logger.info(gun);
-        }
-
-        assertEquals("Size of gun list should be equal 2", 2, gunList.size());
     }
 }

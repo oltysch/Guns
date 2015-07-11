@@ -43,7 +43,7 @@ public class Gun {
         return model;
     }
 
-    @XmlElement
+
     public void setModel(String model) {
         this.model = model;
     }
@@ -51,7 +51,7 @@ public class Gun {
         return origin;
     }
 
-    @XmlElement
+
     public void setOrigin(String origin) {
         this.origin = origin;
     }
@@ -59,7 +59,7 @@ public class Gun {
         return handy;
     }
 
-    @XmlElement
+
     public void setHandy(Handy handy) {
         this.handy = handy;
     }
@@ -67,7 +67,7 @@ public class Gun {
         return firingRange;
     }
 
-    @XmlElement
+
     public void setFiringRange(int firingRange) {
         this.firingRange = firingRange;
     }
@@ -75,7 +75,7 @@ public class Gun {
         return effectiveFiringRange;
     }
 
-    @XmlElement
+
     public void setEffectiveFiringRange(int effectiveFiringRange) {
         this.effectiveFiringRange = effectiveFiringRange;
     }
@@ -83,7 +83,7 @@ public class Gun {
         return cartridgeClip;
     }
 
-    @XmlElement
+
     public void setCartridgeClip(Boolean cartridgeClip) {
         this.cartridgeClip = cartridgeClip;
     }
@@ -91,7 +91,7 @@ public class Gun {
         return optics;
     }
 
-    @XmlElement
+
     public void setOptics(Boolean optics) {
         this.optics = optics;
     }
@@ -100,7 +100,7 @@ public class Gun {
         return material;
     }
 
-    @XmlElement
+
     public void setMaterial(String material) {
         this.material = material;
     }

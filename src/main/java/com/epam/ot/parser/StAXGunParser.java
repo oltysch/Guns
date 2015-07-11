@@ -41,6 +41,7 @@ public class StAXGunParser implements GunParser{
         }
     }
 
+//    method is not finished
     private void serialize(XMLStreamWriter writer, Gun gun) {
         try {
             writer.writeStartDocument();

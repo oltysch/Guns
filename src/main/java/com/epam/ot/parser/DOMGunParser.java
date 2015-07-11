@@ -27,9 +27,9 @@ public class DOMGunParser implements GunParser {
      * parser is not finished yet
      */
     public List<Gun> parse(InputStream input) {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         List<Gun> guns;
         try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(input);
             Element root = doc.getDocumentElement();

@@ -6,19 +6,17 @@ import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 public class StAXGunParserTest {
     StAXGunParser gunParser;
     List<Gun> gunList;
-    public static final Logger logger =Logger.getLogger(SAXGunParserTest.class);
+    public static final Logger logger =Logger.getLogger(StAXGunParserTest.class);
 
     @Before
     public void setUp() throws Exception {
@@ -29,6 +27,26 @@ public class StAXGunParserTest {
     @After
     public void tearDown() throws Exception {
 
+    }
+
+    @Test
+    public void testParse() throws Exception {
+        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
+
+        gunList.addAll(gunParser.parse(input));
+        for (Gun gun : gunList) {
+            logger.info(gun);
+        }
+
+        assertEquals("Size of gun list should be equal 2", 2, gunList.size());
+    }
+
+    @Test
+    public void testWriteGun() throws Exception {
+        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
+
+        gunList.addAll(gunParser.parse(input));
+        gunParser.writeGun(new File("123.xml"), gunList.get(0));
     }
 
     @Test
@@ -43,25 +61,5 @@ public class StAXGunParserTest {
         }
 
         assertThat(throwable, instanceOf(ParseException.class));
-    }
-
-    @Test
-    public void shouldParseGoodXML() throws Exception {
-        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
-
-        gunList.addAll(gunParser.parse(input));
-        for (Gun gun : gunList) {
-            logger.info(gun);
-        }
-
-        assertEquals("Size of gun list should be equal 2", 2, gunList.size());
-    }
-
-    @Test
-    public void testSerialize() throws Exception {
-        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
-
-        gunList.addAll(gunParser.parse(input));
-        gunParser.writeGun(new File("123.xml"), gunList.get(0));
     }
 }
