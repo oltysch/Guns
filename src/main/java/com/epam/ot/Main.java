@@ -12,12 +12,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        JAXBGunParser jaxbGunParser = new JAXBGunParser();
-        try {
-            InputStream input = new FileInputStream("123.xml");
-            jaxbGunParser.parseGun(input);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 }
