@@ -1,9 +1,6 @@
 package com.epam.ot.entity;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Admin on 30.06.2015.
@@ -16,8 +13,8 @@ public class Gun {
     //    private Map<String, String> ttc = new HashMap<String, String>();
     private int firingRange;
     private int effectiveFiringRange;
-    private Boolean cartridgeClip;
-    private Boolean optics;
+    private Boolean cartridgeClipAvailability;
+    private Boolean opticsAvailability;
     private String material;
 
     public Gun() {
@@ -30,14 +27,14 @@ public class Gun {
         this.handy = handy;
         this.firingRange = firingRange;
         this.effectiveFiringRange = effectiveFiringRange;
-        this.cartridgeClip = cartridgeClip;
-        this.optics = optics;
+        this.cartridgeClipAvailability = cartridgeClip;
+        this.opticsAvailability = optics;
         this.material = material;
     }
 
     @Override
     public String toString() {
-        return model + " " + origin + " " + handy + " " + material + "\n     FR: " + firingRange + " EFR: " + effectiveFiringRange + " CC: " + cartridgeClip + " Opt.: " + optics;
+        return model + " " + origin + " " + handy + " " + material + "\n     FR: " + firingRange + " EFR: " + effectiveFiringRange + " CC: " + cartridgeClipAvailability + " Opt.: " + opticsAvailability;
     }
 
     public String getModel() {
@@ -80,20 +77,20 @@ public class Gun {
         this.effectiveFiringRange = effectiveFiringRange;
     }
 
-    public Boolean getCartridgeClip() {
-        return cartridgeClip;
+    public Boolean getCartridgeClipAvailability() {
+        return cartridgeClipAvailability;
     }
 
-    public void setCartridgeClip(Boolean cartridgeClip) {
-        this.cartridgeClip = cartridgeClip;
+    public void setCartridgeClipAvailability(Boolean cartridgeClipAvailability) {
+        this.cartridgeClipAvailability = cartridgeClipAvailability;
     }
 
-    public Boolean getOptics() {
-        return optics;
+    public Boolean getOpticsAvailability() {
+        return opticsAvailability;
     }
 
-    public void setOptics(Boolean optics) {
-        this.optics = optics;
+    public void setOpticsAvailability(Boolean opticsAvailability) {
+        this.opticsAvailability = opticsAvailability;
     }
 
     public String getMaterial() {

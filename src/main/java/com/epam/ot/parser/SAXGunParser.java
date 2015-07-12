@@ -13,8 +13,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Admin on 29.06.2015.
@@ -78,10 +76,10 @@ public class SAXGunParser implements GunParser {
                     gun.setEffectiveFiringRange(Integer.parseInt(accumulator.toString().trim()));
                     break;
                 case "cartridgeClipAvailability":
-                    gun.setCartridgeClip(Boolean.valueOf(accumulator.toString().trim()));
+                    gun.setCartridgeClipAvailability(Boolean.valueOf(accumulator.toString().trim()));
                     break;
                 case "opticsAvailability":
-                    gun.setOptics(Boolean.valueOf(accumulator.toString().trim()));
+                    gun.setOpticsAvailability(Boolean.valueOf(accumulator.toString().trim()));
                     break;
                 case "material":
                     gun.setMaterial(accumulator.toString().trim());

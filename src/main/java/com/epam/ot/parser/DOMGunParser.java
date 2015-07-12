@@ -13,8 +13,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Admin on 04.07.2015.
@@ -54,8 +52,8 @@ public class DOMGunParser implements GunParser {
                 //getting weapon TTC's
                 gun.setFiringRange(Integer.parseInt(getBabyValue(gunElement, "firingRange")));
                 gun.setEffectiveFiringRange(Integer.parseInt(getBabyValue(gunElement, "effectiveFiringRange")));
-                gun.setCartridgeClip(Boolean.valueOf(getBabyValue(gunElement, "cartridgeClipAvailability")));
-                gun.setOptics(Boolean.valueOf(getBabyValue(gunElement, "opticsAvailability")));
+                gun.setCartridgeClipAvailability(Boolean.valueOf(getBabyValue(gunElement, "cartridgeClipAvailability")));
+                gun.setOpticsAvailability(Boolean.valueOf(getBabyValue(gunElement, "opticsAvailability")));
             }
             return gun;
         }

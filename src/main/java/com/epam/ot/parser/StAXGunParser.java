@@ -5,8 +5,8 @@ import com.epam.ot.exception.ParseException;
 
 import javax.xml.stream.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
 import org.apache.log4j.Logger;
 
@@ -44,7 +44,23 @@ public class StAXGunParser implements GunParser {
     //    method is not finished
     private void serialize(XMLStreamWriter writer, Gun gun) {
         try {
+            Field[] declaredFields = gun.getClass().getDeclaredFields();
             writer.writeStartDocument();
+            writer.writeStartElement("gun");
+            for (Field declaredField : declaredFields) {
+                try {
+                    String name = declaredField.getName();
+                    writer.writeStartElement(name);
+                    String method = "get"+name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
+                    writer.writeCharacters(gun.getClass().getMethod(method).invoke(gun).toString());
+                    writer.writeEndElement();
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+            writer.writeEndElement();
+            writer.writeEndDocument();
+            /*writer.writeStartDocument();
 
             writer.writeStartElement("gun");
 
@@ -68,10 +84,10 @@ public class StAXGunParser implements GunParser {
             writer.writeCharacters(String.valueOf(gun.getEffectiveFiringRange()));
             writer.writeEndElement();
             writer.writeStartElement("cartridgeClipAvailability");
-            writer.writeCharacters(String.valueOf(gun.getCartridgeClip()));
+            writer.writeCharacters(String.valueOf(gun.getCartridgeClipAvailability()));
             writer.writeEndElement();
             writer.writeStartElement("opticsAvailability");
-            writer.writeCharacters(String.valueOf(gun.getOptics()));
+            writer.writeCharacters(String.valueOf(gun.getOpticsAvailability()));
             writer.writeEndElement();
             writer.writeEndElement();
 
@@ -79,7 +95,7 @@ public class StAXGunParser implements GunParser {
             writer.writeCharacters(gun.getMaterial());
             writer.writeEndElement();
 
-            writer.writeEndDocument();
+            writer.writeEndDocument();*/
         } catch (XMLStreamException e) {
             throw new ParseException(e);
         }
@@ -119,10 +135,10 @@ public class StAXGunParser implements GunParser {
                             gun.setEffectiveFiringRange(Integer.parseInt(stringBuffer.toString().trim()));
                             break;
                         case "cartridgeClipAvailability":
-                            gun.setCartridgeClip(Boolean.valueOf(stringBuffer.toString().trim()));
+                            gun.setCartridgeClipAvailability(Boolean.valueOf(stringBuffer.toString().trim()));
                             break;
                         case "opticsAvailability":
-                            gun.setOptics(Boolean.valueOf(stringBuffer.toString().trim()));
+                            gun.setOpticsAvailability(Boolean.valueOf(stringBuffer.toString().trim()));
                             break;
                         case "material":
                             gun.setMaterial(stringBuffer.toString().trim());

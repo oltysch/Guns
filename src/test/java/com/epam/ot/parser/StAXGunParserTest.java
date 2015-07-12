@@ -46,6 +46,14 @@ public class StAXGunParserTest {
 
         gun = gunParser.parseGun(input);
         gunParser.writeGun(new File("123.xml"), gun);
+    }
+
+    @Test
+    public void testWriteGunOutput() throws Exception {
+        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
+
+        gun = gunParser.parseGun(input);
+        gunParser.writeGun(new File("123.xml"), gun);
 
         //test parse self output xml
         input = new FileInputStream("123.xml");

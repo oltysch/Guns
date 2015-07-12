@@ -7,6 +7,7 @@ import com.epam.ot.parser.StAXGunParser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
