@@ -11,7 +11,6 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -26,26 +25,25 @@ public class DOMGunParser implements GunParser {
      * @return Gun
      * parser is not finished yet
      */
-    public List<Gun> parse(InputStream input) {
-        List<Gun> guns;
+    public Gun parseGun(InputStream input) {
+        Gun gun;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(input);
             Element root = doc.getDocumentElement();
-            guns = Analyzer.gunBuilder(root);
+            gun = Analyzer.gunBuilder(root);
         } catch (ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
             throw new ParseException(e);
         }
-        return guns;
+        return gun;
     }
 
     private static class Analyzer {
-        public static List<Gun> gunBuilder(Element root) {
+        public static Gun gunBuilder(Element root) {
             NodeList nodes = root.getElementsByTagName("gun");
-            List<Gun> guns = new ArrayList<Gun>();
+            Gun gun = new Gun();
             for (int i = 0; i < nodes.getLength(); i++) {
-                Gun gun = new Gun();
                 Element gunElement = (Element) nodes.item(i);
                 //example without reduction
                 gun.setModel(gunElement.getElementsByTagName("model").item(0).getFirstChild().getNodeValue());
@@ -58,9 +56,8 @@ public class DOMGunParser implements GunParser {
                 gun.setEffectiveFiringRange(Integer.parseInt(getBabyValue(gunElement, "effectiveFiringRange")));
                 gun.setCartridgeClip(Boolean.valueOf(getBabyValue(gunElement, "cartridgeClipAvailability")));
                 gun.setOptics(Boolean.valueOf(getBabyValue(gunElement, "opticsAvailability")));
-                guns.add(gun);
             }
-            return guns;
+            return gun;
         }
 
         private static String getBabyValue(Element parent, String childName) {

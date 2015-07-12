@@ -4,19 +4,19 @@ import com.epam.ot.entity.Gun;
 import com.epam.ot.exception.ParseException;
 
 import javax.xml.stream.*;
-import javax.xml.transform.Result;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+
 /**
  * Created by Admin on 04.07.2015.
  */
-public class StAXGunParser implements GunParser{
-    public static final Logger logger =Logger.getLogger(StAXGunParser.class);
+public class StAXGunParser implements GunParser {
+    public static final Logger logger = Logger.getLogger(StAXGunParser.class);
 
-    public List<Gun> parse(InputStream input) {
+    public Gun parseGun(InputStream input) {
         logger.debug("started parsing");
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         logger.debug("factory prepared");
@@ -41,12 +41,11 @@ public class StAXGunParser implements GunParser{
         }
     }
 
-//    method is not finished
+    //    method is not finished
     private void serialize(XMLStreamWriter writer, Gun gun) {
         try {
             writer.writeStartDocument();
 
-            writer.writeStartElement("guns");
             writer.writeStartElement("gun");
 
             writer.writeStartElement("model");
@@ -86,10 +85,9 @@ public class StAXGunParser implements GunParser{
         }
     }
 
-    private List<Gun> process(XMLStreamReader reader) throws XMLStreamException {
+    private Gun process(XMLStreamReader reader) throws XMLStreamException {
         logger.debug("process launched");
         String name;
-        List<Gun> guns = new ArrayList<>();
         Gun gun = new Gun();
         StringBuffer stringBuffer = new StringBuffer();
         while (reader.hasNext()) {
@@ -100,7 +98,6 @@ public class StAXGunParser implements GunParser{
                     logger.debug("namespaceURI: " + reader.getNamespaceURI());
                     logger.debug("prefix: " + reader.getPrefix());
                     stringBuffer.setLength(0);
-                    if (reader.getLocalName().equals("gun")) gun = new Gun();
                     break;
                 case XMLStreamConstants.END_ELEMENT:
                     logger.debug("end element: " + reader.getLocalName() + " characters: " + stringBuffer.toString());
@@ -130,8 +127,6 @@ public class StAXGunParser implements GunParser{
                         case "material":
                             gun.setMaterial(stringBuffer.toString().trim());
                             break;
-                        case "gun":
-                            guns.add(gun);
                         default:
                     }
                     break;
@@ -141,6 +136,6 @@ public class StAXGunParser implements GunParser{
                     break;
             }
         }
-        return guns;
+        return gun;
     }
 }

@@ -6,22 +6,25 @@ import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 public class StAXGunParserTest {
+    public static final Logger logger = Logger.getLogger(StAXGunParserTest.class);
     StAXGunParser gunParser;
-    List<Gun> gunList;
-    public static final Logger logger =Logger.getLogger(StAXGunParserTest.class);
+    Gun gun;
 
     @Before
     public void setUp() throws Exception {
         gunParser = new StAXGunParser();
-        gunList = new ArrayList<>();
+        gun = new Gun();
     }
 
     @After
@@ -33,20 +36,21 @@ public class StAXGunParserTest {
     public void testParse() throws Exception {
         InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
 
-        gunList.addAll(gunParser.parse(input));
-        for (Gun gun : gunList) {
-            logger.info(gun);
-        }
-
-        assertEquals("Size of gun list should be equal 2", 2, gunList.size());
+        gun = gunParser.parseGun(input);
+        logger.info("\n" + gun);
     }
 
     @Test
     public void testWriteGun() throws Exception {
         InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
 
-        gunList.addAll(gunParser.parse(input));
-        gunParser.writeGun(new File("123.xml"), gunList.get(0));
+        gun = gunParser.parseGun(input);
+        gunParser.writeGun(new File("123.xml"), gun);
+
+        //test parse self output xml
+        input = new FileInputStream("123.xml");
+        gun = gunParser.parseGun(input);
+        gunParser.writeGun(new File("456.xml"), gun);
     }
 
     @Test
@@ -55,8 +59,8 @@ public class StAXGunParserTest {
 
         Throwable throwable = null;
         try {
-            gunList.addAll(gunParser.parse(input));
-        }catch (Throwable t) {
+            gun = gunParser.parseGun(input);
+        } catch (Throwable t) {
             throwable = t;
         }
 

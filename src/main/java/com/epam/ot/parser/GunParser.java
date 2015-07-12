@@ -9,5 +9,5 @@ import java.util.List;
  * Created by Admin on 04.07.2015.
  */
 public interface GunParser {
-    public List<Gun> parse(InputStream input);
+    public Gun parseGun(InputStream input);
 }

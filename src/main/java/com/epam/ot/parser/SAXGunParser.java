@@ -2,7 +2,6 @@ package com.epam.ot.parser;
 
 import com.epam.ot.entity.Gun;
 import com.epam.ot.exception.ParseException;
-import jdk.nashorn.internal.runtime.ParserException;
 import org.apache.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -23,27 +22,26 @@ import java.util.List;
 public class SAXGunParser implements GunParser {
     public static final Logger logger = Logger.getLogger(SAXGunParser.class);
 
-    public List<Gun> parse(InputStream input) {
+    public Gun parseGun(InputStream input) {
         SAXParserFactory spf = SAXParserFactory.newInstance();
-        List<Gun> guns;
+        Gun gun;
         try {
             SAXParser parser = spf.newSAXParser();
             Handler handler = new Handler();
             parser.parse(input, handler);
-            guns = handler.getGuns();
+            gun = handler.getGun();
         } catch (ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
             throw new ParseException(e);
         }
-        return guns;
+        return gun;
     }
 
     class Handler extends DefaultHandler {
         StringBuffer accumulator = new StringBuffer();
-        List<Gun> guns = new ArrayList<>();
         Gun gun = new Gun();
 
-        public List<Gun> getGuns() {
-            return guns;
+        public Gun getGun() {
+            return gun;
         }
 
         public void endDocument() throws SAXException {
@@ -88,8 +86,6 @@ public class SAXGunParser implements GunParser {
                 case "material":
                     gun.setMaterial(accumulator.toString().trim());
                     break;
-                case "gun":
-                    guns.add(gun);
                 default:
             }
         }

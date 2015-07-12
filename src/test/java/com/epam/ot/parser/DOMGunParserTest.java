@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +15,14 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 public class DOMGunParserTest {
+    public static final Logger logger = Logger.getLogger(DOMGunParserTest.class);
     GunParser gunParser;
-    List<Gun> gunList;
-    public static final Logger logger =Logger.getLogger(DOMGunParserTest.class);
+    Gun gun;
 
     @Before
     public void setUp() throws Exception {
         gunParser = new DOMGunParser();
-        gunList = new ArrayList<>();
+        gun = new Gun();
     }
 
     @After
@@ -33,12 +34,8 @@ public class DOMGunParserTest {
     public void testParse() throws Exception {
         InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
 
-        gunList.addAll(gunParser.parse(input));
-        for (Gun gun : gunList) {
-            logger.info(gun);
-        }
-
-        assertEquals("Size of gun list should be equal 2", 2, gunList.size());
+        gun = gunParser.parseGun(input);
+        logger.info("\n" + gun);
     }
 
     @Test
@@ -47,8 +44,8 @@ public class DOMGunParserTest {
 
         Throwable throwable = null;
         try {
-            gunList.addAll(gunParser.parse(input));
-        }catch (Throwable t) {
+            gun = gunParser.parseGun(input);
+        } catch (Throwable t) {
             throwable = t;
         }
 
