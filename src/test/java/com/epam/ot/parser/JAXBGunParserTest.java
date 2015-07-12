@@ -35,6 +35,7 @@ public class JAXBGunParserTest {
     @Test
     public void testParse() throws Exception {
         InputStream input = new FileInputStream("123.xml");
+//        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
 
         gun = gunParser.parseGun(input);
         logger.info("\n" + gun);
@@ -45,6 +46,20 @@ public class JAXBGunParserTest {
         InputStream input = new FileInputStream("123.xml");
         gun = gunParser.parseGun(input);
         gunParser.writeGun(new File("123.xml"), gun);
+    }
+
+    @Test
+    public void testWriteGunOutput() throws Exception {
+        InputStream input = new FileInputStream("123.xml");
+//        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
+
+        gun = gunParser.parseGun(input);
+        gunParser.writeGun(new File("123.xml"), gun);
+
+        //test parse self output xml
+        input = new FileInputStream("123.xml");
+        gun = gunParser.parseGun(input);
+        gunParser.writeGun(new File("456.xml"), gun);
     }
 
     @Test
