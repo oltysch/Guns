@@ -17,6 +17,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 public class JAXBGunParserTest {
+    //TODO - make tests
     public static final Logger logger = Logger.getLogger(JAXBGunParserTest.class);
     JAXBGunParser gunParser;
     Gun gun;
@@ -39,27 +40,6 @@ public class JAXBGunParserTest {
 
         gun = gunParser.parseGun(input);
         logger.info("\n" + gun);
-    }
-
-    @Test
-    public void testWriteGun() throws Exception {
-        InputStream input = new FileInputStream("123.xml");
-        gun = gunParser.parseGun(input);
-        gunParser.writeGun(new File("123.xml"), gun);
-    }
-
-    @Test
-    public void testWriteGunOutput() throws Exception {
-        InputStream input = new FileInputStream("123.xml");
-//        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
-
-        gun = gunParser.parseGun(input);
-        gunParser.writeGun(new File("123.xml"), gun);
-
-        //test parse self output xml
-        input = new FileInputStream("123.xml");
-        gun = gunParser.parseGun(input);
-        gunParser.writeGun(new File("456.xml"), gun);
     }
 
     @Test

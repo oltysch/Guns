@@ -7,11 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by Admin on 26.06.2015.
- */
 @WebServlet(name = "com.epam.ot.Servlet")
 public class Servlet extends HttpServlet {
+//    TODO - make working servlet.
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

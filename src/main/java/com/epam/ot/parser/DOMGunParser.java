@@ -14,9 +14,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by Admin on 04.07.2015.
- */
 public class DOMGunParser implements GunParser {
     /**
      * @param input
@@ -39,22 +36,18 @@ public class DOMGunParser implements GunParser {
 
     private static class Analyzer {
         public static Gun gunBuilder(Element root) {
-            NodeList nodes = root.getElementsByTagName("gun");
             Gun gun = new Gun();
-            for (int i = 0; i < nodes.getLength(); i++) {
-                Element gunElement = (Element) nodes.item(i);
-                //example without reduction
-                gun.setModel(gunElement.getElementsByTagName("model").item(0).getFirstChild().getNodeValue());
-                //examples with reduction
-                gun.setOrigin(getBabyValue(gunElement, "origin"));
-                gun.setHandy(Gun.Handy.valueOf(getBabyValue(gunElement, "handy")));
-                gun.setMaterial(getBabyValue(gunElement, "material"));
-                //getting weapon TTC's
-                gun.setFiringRange(Integer.parseInt(getBabyValue(gunElement, "firingRange")));
-                gun.setEffectiveFiringRange(Integer.parseInt(getBabyValue(gunElement, "effectiveFiringRange")));
-                gun.setCartridgeClipAvailability(Boolean.valueOf(getBabyValue(gunElement, "cartridgeClipAvailability")));
-                gun.setOpticsAvailability(Boolean.valueOf(getBabyValue(gunElement, "opticsAvailability")));
-            }
+            //example without reduction
+            gun.setModel(root.getElementsByTagName("model").item(0).getFirstChild().getNodeValue());
+            //examples with reduction
+            gun.setOrigin(getBabyValue(root, "origin"));
+            gun.setHandy(Gun.Handy.valueOf(getBabyValue(root, "handy")));
+            gun.setMaterial(getBabyValue(root, "material"));
+            //getting weapon TTC's
+            gun.setFiringRange(Integer.parseInt(getBabyValue(root, "firingRange")));
+            gun.setEffectiveFiringRange(Integer.parseInt(getBabyValue(root, "effectiveFiringRange")));
+            gun.setCartridgeClipAvailability(Boolean.valueOf(getBabyValue(root, "cartridgeClipAvailability")));
+            gun.setOpticsAvailability(Boolean.valueOf(getBabyValue(root, "opticsAvailability")));
             return gun;
         }
 

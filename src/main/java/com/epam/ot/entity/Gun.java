@@ -37,6 +37,19 @@ public class Gun {
         return model + " " + origin + " " + handy + " " + material + "\n     FR: " + firingRange + " EFR: " + effectiveFiringRange + " CC: " + cartridgeClipAvailability + " Opt.: " + opticsAvailability;
     }
 
+    //TODO delete this after tests
+    //this a fake getter - needs for test parser and writer
+    public String getStr() {
+        return "fake";
+    }
+
+    //TODO delete this after tests
+    //this a fake setter - needs for test parser and writer
+    public void setStr(String s) {
+        String str = "fake";
+    }
+
+
     public String getModel() {
         return model;
     }

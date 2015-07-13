@@ -8,13 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 public class SAXGunParserTest {
+    //TODO - make tests
     public static final Logger logger = Logger.getLogger(SAXGunParserTest.class);
     GunParser gunParser;
     Gun gun;

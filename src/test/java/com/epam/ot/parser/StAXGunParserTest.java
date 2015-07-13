@@ -10,13 +10,12 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 public class StAXGunParserTest {
+    //TODO - make tests
     public static final Logger logger = Logger.getLogger(StAXGunParserTest.class);
     StAXGunParser gunParser;
     Gun gun;
@@ -38,27 +37,6 @@ public class StAXGunParserTest {
 
         gun = gunParser.parseGun(input);
         logger.info("\n" + gun);
-    }
-
-    @Test
-    public void testWriteGun() throws Exception {
-        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
-
-        gun = gunParser.parseGun(input);
-        gunParser.writeGun(new File("123.xml"), gun);
-    }
-
-    @Test
-    public void testWriteGunOutput() throws Exception {
-        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
-
-        gun = gunParser.parseGun(input);
-        gunParser.writeGun(new File("123.xml"), gun);
-
-        //test parse self output xml
-        input = new FileInputStream("123.xml");
-        gun = gunParser.parseGun(input);
-        gunParser.writeGun(new File("456.xml"), gun);
     }
 
     @Test

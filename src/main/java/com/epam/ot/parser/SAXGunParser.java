@@ -14,9 +14,6 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by Admin on 29.06.2015.
- */
 public class SAXGunParser implements GunParser {
     public static final Logger logger = Logger.getLogger(SAXGunParser.class);
 
