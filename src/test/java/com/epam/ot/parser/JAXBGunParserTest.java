@@ -17,9 +17,8 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 public class JAXBGunParserTest {
-    //TODO - make tests
     public static final Logger logger = Logger.getLogger(JAXBGunParserTest.class);
-    JAXBGunParser gunParser;
+    GunParser gunParser;
     Gun gun;
 
     @Before
@@ -35,14 +34,20 @@ public class JAXBGunParserTest {
 
     @Test
     public void testParse() throws Exception {
-        InputStream input = new FileInputStream("123.xml");
 //        InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
+//TODO delete this bottom string after fix JAXB Parser
+        InputStream input = new FileInputStream("123.xml");
 
         gun = gunParser.parseGun(input);
         logger.info("\n" + gun);
+
+        assertNotNull(gun);
+        assertNotNull(gun.getModel());
+        assertNotNull(gun.getFiringRange());
     }
 
     @Test
+
     public void shouldThrowExceptionForNullInputStream() throws Exception {
         InputStream input = null;
 

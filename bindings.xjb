@@ -1,5 +1,0 @@
-<jaxb:bindings>
-    <jaxb:globalBindings >
-        <xjc:simple/>
-    </jaxb:globalBindings>
-</jaxb:bindings>

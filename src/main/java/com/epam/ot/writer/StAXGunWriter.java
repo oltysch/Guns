@@ -40,7 +40,7 @@ public class StAXGunWriter implements GunWriter {
                     writer.writeCharacters(gun.getClass().getMethod(method).invoke(gun).toString());
                     writer.writeEndElement();
                 } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                    e.printStackTrace();
+                    throw new ParseException(e);
                 }
             }
             writer.writeEndElement();

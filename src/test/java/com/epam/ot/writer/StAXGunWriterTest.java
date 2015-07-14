@@ -1,5 +1,9 @@
 package com.epam.ot.writer;
 
+import com.epam.ot.entity.Gun;
+import com.epam.ot.exception.ParseException;
+import com.epam.ot.parser.GunParser;
+import com.epam.ot.parser.StAXGunParser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +15,15 @@ import java.io.InputStream;
 import static org.junit.Assert.*;
 
 public class StAXGunWriterTest {
-//    TODO - make tests
+    Gun gun;
+    GunParser parser;
+    GunWriter writer;
+
     @Before
     public void setUp() throws Exception {
-
+        gun = new Gun();
+        parser = new StAXGunParser();
+        writer = new StAXGunWriter();
     }
 
     @After
@@ -26,20 +35,40 @@ public class StAXGunWriterTest {
     public void testWriteGun() throws Exception {
         InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
 
-        gun = gunParser.parseGun(input);
-        gunParser.writeGun(new File("123.xml"), gun);
+        gun = parser.parseGun(input);
+        Throwable throwable = null;
+        try {
+            writer.writeGun(new File("123.xml"), gun);
+        } catch (ParseException e) {
+            throwable = e;
+        }
+
+        assertNull(throwable);
     }
 
     @Test
     public void testWriteGunOutput() throws Exception {
         InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
 
-        gun = gunParser.parseGun(input);
-        gunParser.writeGun(new File("123.xml"), gun);
+        gun = parser.parseGun(input);
+        writer.writeGun(new File("123.xml"), gun);
 
         //test parse self output xml
         input = new FileInputStream("123.xml");
-        gun = gunParser.parseGun(input);
-        gunParser.writeGun(new File("456.xml"), gun);
+        Throwable throwable = null;
+        try {
+            Gun gun2 = parser.parseGun(input);
+            writer.writeGun(new File("456.xml"), gun);
+            assertEquals(gun, gun2);
+        } catch (ParseException e) {
+            throwable = e;
+        }
+
+        assertNull(throwable);
+    }
+
+    @Test
+    public void shouldThrowExceptionForNullOutput() {
+        //TODO make this test
     }
 }

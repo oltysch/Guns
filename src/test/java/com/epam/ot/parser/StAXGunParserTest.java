@@ -2,6 +2,7 @@ package com.epam.ot.parser;
 
 import com.epam.ot.entity.Gun;
 import com.epam.ot.exception.ParseException;
+import junit.framework.Assert;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -15,9 +16,8 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 public class StAXGunParserTest {
-    //TODO - make tests
     public static final Logger logger = Logger.getLogger(StAXGunParserTest.class);
-    StAXGunParser gunParser;
+    GunParser gunParser;
     Gun gun;
 
     @Before
@@ -37,6 +37,10 @@ public class StAXGunParserTest {
 
         gun = gunParser.parseGun(input);
         logger.info("\n" + gun);
+
+        assertNotNull(gun);
+        assertNotNull(gun.getModel());
+        assertNotNull(gun.getFiringRange());
     }
 
     @Test

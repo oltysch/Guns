@@ -13,7 +13,6 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
 
 public class SAXGunParserTest {
-    //TODO - make tests
     public static final Logger logger = Logger.getLogger(SAXGunParserTest.class);
     GunParser gunParser;
     Gun gun;
@@ -35,6 +34,10 @@ public class SAXGunParserTest {
 
         gun = gunParser.parseGun(input);
         logger.info("\n" + gun);
+
+        assertNotNull(gun);
+        assertNotNull(gun.getModel());
+        assertNotNull(gun.getFiringRange());
     }
 
     @Test
