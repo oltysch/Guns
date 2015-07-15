@@ -2,9 +2,6 @@ package com.epam.ot.entity;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * Created by Admin on 30.06.2015.
- */
 @XmlRootElement
 public class Gun {
     private String model;

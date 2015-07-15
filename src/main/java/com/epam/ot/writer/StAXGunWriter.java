@@ -12,6 +12,9 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StAXGunWriter implements GunWriter {
     public void writeGun(File output, Gun gun) {
@@ -28,18 +31,16 @@ public class StAXGunWriter implements GunWriter {
     private void serialize(XMLStreamWriter writer, Gun gun) {
         try {
             //TODO create Map of fields
-            //TODO change the logic on: receive getters - and use it for getting values.
-            Field[] declaredFields = gun.getClass().getDeclaredFields();
+            Method[] declaredMethods = gun.getClass().getDeclaredMethods();
             writer.writeStartDocument();
-            writer.writeStartElement("gun");
-            for (Field declaredField : declaredFields) {
+            writer.writeStartElement(getFirstLowerCase(gun.getClass().getSimpleName()));
+            Map<String, Method> fieldsAndGetters = getMapGetters(declaredMethods);
+            for (String field : fieldsAndGetters.keySet()) {
                 try {
-                    String name = declaredField.getName();
-                    writer.writeStartElement(name);
-                    String method = "get"+name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
-                    writer.writeCharacters(gun.getClass().getMethod(method).invoke(gun).toString());
+                    writer.writeStartElement(field);
+                    writer.writeCharacters(fieldsAndGetters.get(field).invoke(gun).toString());
                     writer.writeEndElement();
-                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                } catch (IllegalAccessException | InvocationTargetException e) {
                     throw new ParseException(e);
                 }
             }
@@ -48,5 +49,19 @@ public class StAXGunWriter implements GunWriter {
         } catch (XMLStreamException e) {
             throw new ParseException(e);
         }
+    }
+
+    private Map<String, Method> getMapGetters(Method[] declaredMethods) {
+        Map<String, Method> fieldsAndGetters = new HashMap<>();
+        for (Method declaredMethod : declaredMethods) {
+            if (declaredMethod.getName().substring(0, 3).equals("get")) {
+                fieldsAndGetters.put(getFirstLowerCase(declaredMethod.getName().substring(3)), declaredMethod);
+            }
+        }
+        return fieldsAndGetters;
+    }
+
+    private String getFirstLowerCase(String string) {
+        return string.substring(0, 1).toLowerCase() + string.substring(1);
     }
 }

@@ -35,7 +35,9 @@ public class StAXGunWriterTest {
     public void testWriteGun() throws Exception {
         InputStream input = getClass().getClassLoader().getResourceAsStream("gun.xml");
 
+        //TODO make a gun factory for this
         gun = parser.parseGun(input);
+
         Throwable throwable = null;
         try {
             writer.writeGun(new File("123.xml"), gun);
@@ -59,7 +61,8 @@ public class StAXGunWriterTest {
         try {
             Gun gun2 = parser.parseGun(input);
             writer.writeGun(new File("456.xml"), gun);
-            assertEquals(gun, gun2);
+            assertEquals(gun.getModel(), gun2.getModel());
+            assertEquals(gun.getFiringRange(), gun2.getFiringRange());
         } catch (ParseException e) {
             throwable = e;
         }
