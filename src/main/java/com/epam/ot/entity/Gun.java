@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Gun {
+    private long id;
     private String model;
     private String origin;
     private Handy handy;
@@ -93,6 +94,14 @@ public class Gun {
 
     public void setCartridgeClipAvailability(Boolean cartridgeClipAvailability) {
         this.cartridgeClipAvailability = cartridgeClipAvailability;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Boolean getOpticsAvailability() {

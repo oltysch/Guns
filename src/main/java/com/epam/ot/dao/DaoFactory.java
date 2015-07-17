@@ -5,7 +5,5 @@ public abstract class DaoFactory {
         return new JdbcDaoFactory();
     }
 
-    public GunDao newGunDao() {
-        return null;
-    }
+    public abstract GunDao newGunDao();
 }

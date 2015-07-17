@@ -1,6 +1,6 @@
 package com.epam.ot.dao;
 
-import com.epam.ot.db.ConnPool;
+import com.epam.ot.db.ConnectionPool;
 import com.epam.ot.entity.Gun;
 
 import java.sql.Connection;
@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class JdbcGunDao implements GunDao {
-    /*ConnPool pool;
+    /*ConnectionPool pool;
     public Gun findById(long id) {
         Connection connection = pool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT id, firstName, lastName FROM gun WHERE id = ?");
