@@ -21,9 +21,9 @@ public class ConnectionPool {
 
     private ConnectionPool() {
         try {
-            Class.forName(DRIVER);
+            Class.forName("org.h2.Driver");
 
-            connection = DriverManager.getConnection(CONNECT, CONNECT_ID, PASSWORD);
+            connection = DriverManager.getConnection("jdbc:h2:~/test", "sc", "");
         } catch (ClassNotFoundException | SQLException e) {
             throw new ConnectionPoolException(e);
         }

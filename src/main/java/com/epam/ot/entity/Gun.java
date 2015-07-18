@@ -8,7 +8,6 @@ public class Gun {
     private String model;
     private String origin;
     private Handy handy;
-    //    private Map<String, String> ttc = new HashMap<String, String>();
     private int firingRange;
     private int effectiveFiringRange;
     private Boolean cartridgeClipAvailability;
@@ -18,11 +17,11 @@ public class Gun {
     public Gun() {
     }
 
-    public Gun(String model, String origin, Handy handy, int firingRange, int effectiveFiringRange,
+    public Gun(String model, String origin, String handy, int firingRange, int effectiveFiringRange,
                Boolean cartridgeClip, Boolean optics, String material) {
         this.model = model;
         this.origin = origin;
-        this.handy = handy;
+        this.handy = Handy.valueOf(handy);
         this.firingRange = firingRange;
         this.effectiveFiringRange = effectiveFiringRange;
         this.cartridgeClipAvailability = cartridgeClip;
@@ -64,12 +63,12 @@ public class Gun {
         this.origin = origin;
     }
 
-    public Handy getHandy() {
-        return handy;
+    public String getHandy() {
+        return handy.toString();
     }
 
-    public void setHandy(Handy handy) {
-        this.handy = handy;
+    public void setHandy(String handy) {
+        this.handy = Handy.valueOf(handy);
     }
 
     public int getFiringRange() {

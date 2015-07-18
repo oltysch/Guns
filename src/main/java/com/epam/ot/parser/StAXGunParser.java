@@ -50,7 +50,7 @@ public class StAXGunParser implements GunParser {
                             logger.debug("chars1: " + stringBuilder.toString());
                             break;
                         case "handy":
-                            gun.setHandy(Gun.Handy.valueOf(stringBuilder.toString().trim()));
+                            gun.setHandy(stringBuilder.toString().trim());
                             break;
                         case "origin":
                             gun.setOrigin(stringBuilder.toString().trim());

@@ -61,7 +61,7 @@ public class SAXGunParser implements GunParser {
                     logger.debug("chars1: " + accumulator.toString());
                     break;
                 case "handy":
-                    gun.setHandy(Gun.Handy.valueOf(accumulator.toString().trim()));
+                    gun.setHandy(accumulator.toString().trim());
                     break;
                 case "origin":
                     gun.setOrigin(accumulator.toString().trim());

@@ -2,8 +2,11 @@ package com.epam.ot.dao;
 
 import com.epam.ot.entity.Gun;
 
+import java.sql.Connection;
+
 public interface GunDao {
-    /*Gun findById(long id);
+
+    Gun findById(int id);
 
     void update();
 
@@ -13,5 +16,5 @@ public interface GunDao {
 
     Gun insert();
 
-    void upset();*/
+    void upset();
 }

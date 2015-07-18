@@ -41,7 +41,7 @@ public class DOMGunParser implements GunParser {
             gun.setModel(root.getElementsByTagName("model").item(0).getFirstChild().getNodeValue());
             //examples with reduction
             gun.setOrigin(getBabyValue(root, "origin"));
-            gun.setHandy(Gun.Handy.valueOf(getBabyValue(root, "handy")));
+            gun.setHandy(getBabyValue(root, "handy"));
             gun.setMaterial(getBabyValue(root, "material"));
             //getting weapon TTC's
             gun.setFiringRange(Integer.parseInt(getBabyValue(root, "firingRange")));
