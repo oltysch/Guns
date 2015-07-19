@@ -1,37 +1,72 @@
 package com.epam.ot.db;
 
+import com.epam.ot.util.PropertyManager;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Vector;
 
 public class ConnectionPool {
-    //TODO make connectionPool
-    private static ConnectionPool ourInstance = new ConnectionPool();
-    public static String DRIVER = "org.h2.Driver";
-    public static String CONNECT = "jdbc:h2:~/test";
-    public static String CONNECT_ID = "sc";
-    public static String PASSWORD = "";
+    private static ConnectionPool instance;
+    private PropertyManager propertyManager = new PropertyManager("connection.properties");
+    private Vector<Connection> availableConnections = new Vector<Connection>();
+    private Vector<Connection> usedConnections = new Vector<Connection>();
 
-    Connection connection;
+    public ConnectionPool() {
 
-    public static ConnectionPool getInstance() {
-        return ourInstance;
     }
 
-    private ConnectionPool() {
+    public ConnectionPool(int initConnectionCount) {
         try {
-            Class.forName("org.h2.Driver");
-
-            connection = DriverManager.getConnection("jdbc:h2:~/test", "sc", "");
-        } catch (ClassNotFoundException | SQLException e) {
+            Class.forName(propertyManager.getProperty("driver"));
+        } catch (Exception e) {
             throw new ConnectionPoolException(e);
+        }
+        for (int i = 0; i < initConnectionCount; i++) {
+            availableConnections.addElement(newConnection());
         }
     }
 
-    public Connection getConnection() {
-        return connection;
+    public static synchronized ConnectionPool getInstance() {
+        if (instance == null) {
+            instance = new ConnectionPool();
+        }
+        return instance;
     }
 
+    public synchronized Connection getConnection() {
+        Connection newConn = null;
+        if (availableConnections.size() == 0) {
+            newConn = newConnection();
+        } else {
+            newConn = (Connection) availableConnections.lastElement();
+            availableConnections.removeElement(newConn);
+        }
+        usedConnections.addElement(newConn);
+        return newConn;
+    }
 
+    public synchronized void putBack(Connection c) throws NullPointerException {
+        if (c != null) {
+            if (usedConnections.removeElement(c)) {
+                availableConnections.addElement(c);
+            } else {
+                throw new NullPointerException("Connection not in the usedConnections");
+            }
+        }
+    }
+
+    private Connection newConnection() {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(propertyManager.getProperty("url"), propertyManager.getProperty("login"), propertyManager.getProperty("password"));
+        } catch (Exception e) {
+            throw new ConnectionPoolException(e);
+        }
+        return conn;
+    }
+
+    public int getAvailableConnectionsCount() {
+        return availableConnections.size();
+    }
 }
