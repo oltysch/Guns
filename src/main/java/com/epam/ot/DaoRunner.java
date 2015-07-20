@@ -10,6 +10,7 @@ public class DaoRunner {
         DaoFactory daoFactory = DaoFactory.getInstance();
         GunDao gunDao = daoFactory.createGunDao();
         Gun gun = gunDao.findById(1);
+        gunDao.insert(6, "five seven", "USA", "One_handed", 200, 100, true, false, "plastic");
         gun.setMaterial("Plastic");
         System.out.println(gun);
         /*gunDao.update();
