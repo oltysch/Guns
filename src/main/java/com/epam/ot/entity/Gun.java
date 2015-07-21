@@ -35,13 +35,13 @@ public class Gun {
     }
 
     //TODO delete this after tests
-    //this a fake getter - needs for test parser and writer
+    //this a fake getter - needs for testing parser and writer
     public String getStr() {
         return "fake";
     }
 
     //TODO delete this after tests
-    //this a fake setter - needs for test parser and writer
+    //this a fake setter - needs for testing parser and writer
     public void setStr(String s) {
         String str = "fake";
     }

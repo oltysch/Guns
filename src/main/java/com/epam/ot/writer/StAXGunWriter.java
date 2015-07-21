@@ -30,7 +30,6 @@ public class StAXGunWriter implements GunWriter {
 
     private void serialize(XMLStreamWriter writer, Gun gun) {
         try {
-            //TODO create Map of fields
             Method[] declaredMethods = gun.getClass().getDeclaredMethods();
             writer.writeStartDocument();
             writer.writeStartElement(getFirstLowerCase(gun.getClass().getSimpleName()));

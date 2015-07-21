@@ -92,7 +92,9 @@ public class JdbcGunDao implements GunDao {
         } catch (SQLException e) {
             throw new DaoException(e);
         }
-        /* TODO make realization
+
+
+        /*
         Connection connection = pool.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO PERSON (id, firstName, lastName) VALUES (DEFAULT, ?, ?)");
         preparedStatement.setString(1, gun.getModel());
@@ -102,6 +104,10 @@ public class JdbcGunDao implements GunDao {
         generatedKeys.next();
         long id = generatedKeys.getLong(1);
         person.setId(id);*/
+    }
+
+    public void insert(Gun gun) {
+
     }
 
     public void upset() {
