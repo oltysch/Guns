@@ -25,6 +25,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Runnable runnable = () -> {
+            //TODO - try make there gunDao.findById()
+            //TODO - change charset to UTF-8
             for (int i = 0; i < 1000; i++) {
                 increment();
             }
