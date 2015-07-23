@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Guns Shop</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Style.css">
 </head>
 <body>
 <div class="GunData">
