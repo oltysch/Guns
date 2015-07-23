@@ -7,22 +7,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "com.epam.ot.Servlet")
+@WebServlet(name = "Servlet", urlPatterns = "/new")
 public class Servlet extends HttpServlet {
 //    TODO - make working servlet.
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            wait(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            wait(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+    }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.service(req, resp);
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+
+    @Override
+    public void init() throws ServletException {
+
     }
 }

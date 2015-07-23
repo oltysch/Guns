@@ -1,12 +1,9 @@
 package com.epam.ot.parser;
 
 import com.epam.ot.entity.Gun;
-import com.epam.ot.exception.ParseException;
 
 import javax.xml.stream.*;
 import java.io.*;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 
 import org.apache.log4j.Logger;
 
@@ -23,7 +20,7 @@ public class StAXGunParser implements GunParser {
             logger.debug("reader prepared");
             return process(reader);
         } catch (XMLStreamException e) {
-            throw new ParseException(e);
+            throw new ParserException(e);
         }
     }
 

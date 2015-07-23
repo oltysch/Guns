@@ -1,8 +1,6 @@
 package com.epam.ot.writer;
 
 import com.epam.ot.entity.Gun;
-import com.epam.ot.exception.ParseException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -17,7 +15,7 @@ public class JAXBGunWriter implements GunWriter {
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.marshal(gun, output);
         } catch (JAXBException e) {
-            throw new ParseException(e);
+            throw new WriterException(e);
         }
     }
 }

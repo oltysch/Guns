@@ -1,7 +1,6 @@
 package com.epam.ot.parser;
 
 import com.epam.ot.entity.Gun;
-import com.epam.ot.exception.ParseException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -29,7 +28,7 @@ public class DOMGunParser implements GunParser {
             Element root = doc.getDocumentElement();
             gun = Analyzer.gunBuilder(root);
         } catch (ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
-            throw new ParseException(e);
+            throw new ParserException(e);
         }
         return gun;
     }

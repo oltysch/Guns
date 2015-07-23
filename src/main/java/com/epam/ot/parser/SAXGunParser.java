@@ -1,7 +1,6 @@
 package com.epam.ot.parser;
 
 import com.epam.ot.entity.Gun;
-import com.epam.ot.exception.ParseException;
 import org.apache.log4j.Logger;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -26,7 +25,7 @@ public class SAXGunParser implements GunParser {
             parser.parse(input, handler);
             gun = handler.getGun();
         } catch (ParserConfigurationException | SAXException | IOException | IllegalArgumentException e) {
-            throw new ParseException(e);
+            throw new ParserException(e);
         }
         return gun;
     }

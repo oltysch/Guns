@@ -1,17 +1,13 @@
 package com.epam.ot.parser;
 
 import com.epam.ot.entity.Gun;
-import com.epam.ot.exception.ParseException;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.*;
@@ -58,6 +54,6 @@ public class JAXBGunParserTest {
             throwable = t;
         }
 
-        assertThat(throwable, instanceOf(ParseException.class));
+        assertThat(throwable, instanceOf(ParserException.class));
     }
 }

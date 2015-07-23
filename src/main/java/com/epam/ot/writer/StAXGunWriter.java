@@ -1,8 +1,6 @@
 package com.epam.ot.writer;
 
 import com.epam.ot.entity.Gun;
-import com.epam.ot.exception.ParseException;
-
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
@@ -10,7 +8,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -24,7 +21,7 @@ public class StAXGunWriter implements GunWriter {
             XMLStreamWriter writer = outputFactory.createXMLStreamWriter(outputStream);
             serialize(writer, gun);
         } catch (XMLStreamException | FileNotFoundException e) {
-            throw new ParseException(e);
+            throw new WriterException(e);
         }
     }
 
@@ -40,13 +37,13 @@ public class StAXGunWriter implements GunWriter {
                     writer.writeCharacters(fieldsAndGetters.get(field).invoke(gun).toString());
                     writer.writeEndElement();
                 } catch (IllegalAccessException | InvocationTargetException e) {
-                    throw new ParseException(e);
+                    throw new WriterException(e);
                 }
             }
             writer.writeEndElement();
             writer.writeEndDocument();
         } catch (XMLStreamException e) {
-            throw new ParseException(e);
+            throw new WriterException(e);
         }
     }
 

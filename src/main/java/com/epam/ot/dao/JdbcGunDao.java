@@ -19,6 +19,7 @@ public class JdbcGunDao implements GunDao {
     private String material;*/
     public static final String FIND_BY_ID = "SELECT * FROM GUNS WHERE id = ?";
     public static final String INSERT_INTO_GUNS = "INSERT INTO GUNS (id, model, origin, handy, firing_range, effective_firing_range, cartridge_clip_availability, optics_availability, material) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public static final String DELETE_GUN = "DELETE FROM GUNS WHERE id = ?";
     public static final String ID = "id";
     public static final String MODEL = "model";
     public static final String ORIGIN = "origin";

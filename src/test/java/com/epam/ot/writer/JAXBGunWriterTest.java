@@ -1,7 +1,7 @@
 package com.epam.ot.writer;
 
 import com.epam.ot.entity.Gun;
-import com.epam.ot.exception.ParseException;
+import com.epam.ot.parser.ParserException;
 import com.epam.ot.parser.GunParser;
 import com.epam.ot.parser.JAXBGunParser;
 import org.junit.After;
@@ -41,7 +41,7 @@ public class JAXBGunWriterTest {
         gun = parser.parseGun(input);
         try {
             writer.writeGun(new File("123.xml"), gun);
-        } catch (ParseException e) {
+        } catch (ParserException e) {
             throwable = e;
         }
 
@@ -64,7 +64,7 @@ public class JAXBGunWriterTest {
             Gun gun2 = parser.parseGun(input);
             writer.writeGun(new File("456.xml"), gun);
             assertEquals(gun, gun2);
-        } catch (ParseException e) {
+        } catch (ParserException e) {
             throwable = e;
         }
 
