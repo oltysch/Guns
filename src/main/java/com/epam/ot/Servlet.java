@@ -1,5 +1,8 @@
 package com.epam.ot;
 
+import com.epam.ot.action.Action;
+import com.epam.ot.action.ActionFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,18 +12,16 @@ import java.io.IOException;
 
 @WebServlet(name = "Servlet", urlPatterns = "/new")
 public class Servlet extends HttpServlet {
-//    TODO - make working servlet.
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
+    //    TODO - make working servlet.
+    private ActionFactory factory;
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.service(req, resp);
+        Action action = factory.getAction(req);
+        if (action == null) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+        String view = action.execute(req, resp);
     }
 
     @Override
@@ -30,6 +31,6 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-
+        factory = new ActionFactory();
     }
 }
