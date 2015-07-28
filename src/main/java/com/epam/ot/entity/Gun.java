@@ -46,7 +46,6 @@ public class Gun {
         String str = "fake";
     }
 
-
     public String getModel() {
         return model;
     }
@@ -118,7 +117,6 @@ public class Gun {
     public void setMaterial(String material) {
         this.material = material;
     }
-
 
     public enum Handy {One_handed, Two_handed;}
 }

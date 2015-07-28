@@ -38,24 +38,4 @@
             <version>1.4.187</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <bindingDirectory>${project.basedir}/xjb</bindingDirectory>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
